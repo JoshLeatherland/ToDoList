@@ -1,6 +1,11 @@
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function EmptyState() {
+  const { t, ready } = useTranslation();
+
+  if (!ready) return <div>{t("shared.loading")}</div>;
+
   return (
     <Box
       sx={{
@@ -11,17 +16,14 @@ function EmptyState() {
       }}
     >
       <Typography variant="h6" gutterBottom>
-        Welcome to the To-Do App!
+        {t("emptyState.title")}
       </Typography>
-      <Typography>
-        Click the <strong>settings icon</strong> in the top right to get started
-        by adding columns.
-      </Typography>
+      <Typography>{t("emptyState.getStarted")}</Typography>
 
-      <Typography sx={{ marginY: 2 }}>OR</Typography>
+      <Typography sx={{ marginY: 2 }}>{t("emptyState.or")}</Typography>
 
       <Typography>
-        Explore the{" "}
+        {t("emptyState.explore")}{" "}
         <a
           href="https://github.com/JoshLeatherland/ToDoList/"
           target="_blank"
@@ -32,7 +34,7 @@ function EmptyState() {
             fontWeight: "bold",
           }}
         >
-          GitHub repository.
+          {t("emptyState.github")}.
         </a>
       </Typography>
     </Box>

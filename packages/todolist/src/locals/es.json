@@ -35,6 +35,13 @@
       "deleteDescription": "¿Estás seguro de que deseas eliminar esta columna? Todas las tareas dentro de esta columna también serán eliminadas.",
       "hide": "OCULTAR",
       "show": "MOSTRAR"
+    },
+    "emptyState": {
+      "title": "¡Bienvenido a la aplicación To-Do!",
+      "getStarted": "Haz clic en el ícono de configuración en la parte superior derecha para comenzar añadiendo columnas.",
+      "or": "O",
+      "explore": "Explora el",
+      "github": "repositorio de GitHub"
     }
   }
 }

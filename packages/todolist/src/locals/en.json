@@ -35,6 +35,13 @@
       "deleteDescription": "Are you sure you want to delete this column? All tasks within this column will also be deleted.",
       "hide": "HIDE",
       "show": "SHOW"
+    },
+    "emptyState": {
+      "title": "Welcome to the To-Do App!",
+      "getStarted": "Click the settings icon in the top right to get started by adding columns.",
+      "or": "OR",
+      "explore": "Explore the",
+      "github": "GitHub repository"
     }
   }
 }
