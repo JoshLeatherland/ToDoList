@@ -1,0 +1,40 @@
+{
+  "translation": {
+    "shared": {
+      "loading": "Loading...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "add": "Add",
+      "remove": "Remove",
+      "yes": "Yes",
+      "no": "No",
+      "delete": "Delete",
+      "defaultApplicationName": "ToDo"
+    },
+    "settingsDialog": {
+      "title": "Settings",
+      "columnHeading": "Manage Columns",
+      "newColumn": "New Column"
+    },
+    "task": {
+      "comments": {
+        "pascal": "Comments",
+        "camel": "comments"
+      },
+      "name": "Task Name",
+      "deleteTitle": "Delete Task",
+      "deleteDescription": "Are you sure you want to delete this task? This action cannot be undone.",
+      "editTitle": "Edit Task",
+      "addComment": "Add a comment"
+    },
+    "column": {
+      "newTask": "New Task",
+      "add": "Add",
+      "completed": "Completed",
+      "deleteTitle": "Delete Column",
+      "deleteDescription": "Are you sure you want to delete this column? All tasks within this column will also be deleted.",
+      "hide": "HIDE",
+      "show": "SHOW"
+    }
+  }
+}

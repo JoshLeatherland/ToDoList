@@ -8,6 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 const ConfirmationDialog = ({
   open,
@@ -16,6 +17,10 @@ const ConfirmationDialog = ({
   onCancel,
   onConfirm,
 }) => {
+  const { t, ready } = useTranslation();
+
+  if (!ready) return <div>{t("shared.loading")}</div>;
+
   return (
     <Dialog open={open} onClose={onCancel} fullWidth maxWidth="md">
       <DialogTitle>{title}</DialogTitle>
@@ -24,10 +29,10 @@ const ConfirmationDialog = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancel} color="secondary">
-          Cancel
+          {t("shared.cancel")}
         </Button>
         <Button onClick={onConfirm} color="primary">
-          Yes
+          {t("shared.yes")}
         </Button>
       </DialogActions>
     </Dialog>

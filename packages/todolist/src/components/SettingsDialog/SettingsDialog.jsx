@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 function ColumnAddDialog({
   open,
@@ -17,15 +18,19 @@ function ColumnAddDialog({
   onColumnNameChange,
   onAddColumn,
 }) {
+  const { t, ready } = useTranslation();
+
+  if (!ready) return <div>{t("shared.loading")}</div>;
+
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
-      <DialogTitle>Settings:</DialogTitle>
+      <DialogTitle>{t("settingsDialog.title")}:</DialogTitle>
       <DialogContent>
         <Typography variant="h6" gutterBottom>
-          Manage Columns:
+          {t("settingsDialog.columnHeading")}:
         </Typography>
         <TextField
-          label="New Column"
+          label={t("settingsDialog.newColumn")}
           variant="outlined"
           fullWidth
           value={newColumnName}
@@ -34,10 +39,10 @@ function ColumnAddDialog({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
-          Cancel
+          {t("shared.cancel")}
         </Button>
         <Button onClick={onAddColumn} color="primary">
-          Add Column
+          {t("shared.save")}
         </Button>
       </DialogActions>
     </Dialog>

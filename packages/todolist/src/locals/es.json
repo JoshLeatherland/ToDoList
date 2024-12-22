@@ -1,0 +1,40 @@
+{
+  "translation": {
+    "shared": {
+      "loading": "Cargando...",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "add": "Añadir",
+      "remove": "Eliminar",
+      "yes": "Sí",
+      "no": "No",
+      "delete": "Eliminar",
+      "defaultApplicationName": "ToDo"
+    },
+    "settingsDialog": {
+      "title": "Configuración",
+      "columnHeading": "Gestionar Columnas",
+      "newColumn": "Nueva Columna"
+    },
+    "task": {
+      "comments": {
+        "pascal": "Comentarios",
+        "camel": "comentarios"
+      },
+      "name": "Nombre de la Tarea",
+      "deleteTitle": "Eliminar Tarea",
+      "deleteDescription": "¿Estás seguro de que deseas eliminar esta tarea? Esta acción no se puede deshacer.",
+      "editTitle": "Editar Tarea",
+      "addComment": "Añadir un comentario"
+    },
+    "column": {
+      "newTask": "Nueva Tarea",
+      "add": "Añadir",
+      "completed": "Completado",
+      "deleteTitle": "Eliminar Columna",
+      "deleteDescription": "¿Estás seguro de que deseas eliminar esta columna? Todas las tareas dentro de esta columna también serán eliminadas.",
+      "hide": "OCULTAR",
+      "show": "MOSTRAR"
+    }
+  }
+}
