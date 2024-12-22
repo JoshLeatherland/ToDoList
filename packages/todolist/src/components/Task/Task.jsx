@@ -20,6 +20,7 @@ import { useTheme } from "@emotion/react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ConfirmationDialog from "../ConfirmationDialog";
+import { useTranslation } from "react-i18next";
 
 function Task({ task, onUpdateTask, onDeleteTask }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -61,6 +62,10 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
     setComments([newCommentObj, ...comments]);
     setNewComment("");
   };
+
+  const { t, ready } = useTranslation();
+
+  if (!ready) return <div>{t("shared.loading")}</div>;
 
   return (
     <>
@@ -104,7 +109,7 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
             {task.timestamp} {"  "}
           </Typography>
           <Typography variant="caption" color="textSecondary">
-            - {task.comments.length} comments
+            - {task.comments.length} {t("task.comments.camel")}
           </Typography>
         </Box>
 
@@ -128,8 +133,8 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
 
       <ConfirmationDialog
         open={showDeleteDialog}
-        title="Delete Task"
-        description="Are you sure you want to delete this task? This action cannot be undone."
+        title={t("task.deleteTitle")}
+        description={t("task.deleteDescription")}
         onCancel={() => setShowDeleteDialog(false)}
         onConfirm={confirmDelete}
       />
@@ -140,23 +145,23 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>Edit Task</DialogTitle>
+        <DialogTitle>{t("task.editTitle")}</DialogTitle>
         <DialogContent>
           <TextField
             fullWidth
-            label="Task Name"
+            label={t("task.name")}
             value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
             margin="normal"
           />
 
           <Typography variant="h6" mt={2}>
-            Comments
+            {t("task.comments.pascal")}
           </Typography>
           <Box display="flex" gap={1} mb={2}>
             <TextField
               fullWidth
-              label="Add a comment"
+              label={t("task.addComment")}
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               onKeyDown={(e) => {
@@ -167,7 +172,7 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
               }}
             />
             <Button variant="contained" onClick={addComment}>
-              Add
+              {t("shared.add")}
             </Button>
           </Box>
 
@@ -184,10 +189,10 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowEditDialog(false)} color="secondary">
-            Cancel
+            {t("shared.cancel")}
           </Button>
           <Button onClick={saveTaskChanges} color="primary" variant="contained">
-            Save
+            {t("shared.save")}
           </Button>
         </DialogActions>
       </Dialog>

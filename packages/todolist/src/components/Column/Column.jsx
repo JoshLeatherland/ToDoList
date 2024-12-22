@@ -11,6 +11,7 @@ import {
 import { useTheme } from "@emotion/react";
 import Task from "../Task";
 import ConfirmationDialog from "../ConfirmationDialog";
+import { useTranslation } from "react-i18next";
 
 function Column({ column, updateColumn, deleteColumn }) {
   const [newTask, setNewTask] = useState("");
@@ -58,6 +59,10 @@ function Column({ column, updateColumn, deleteColumn }) {
   const completedTasks = column.tasks.filter((task) => task.completed);
   const incompleteTasks = column.tasks.filter((task) => !task.completed);
 
+  const { t, ready } = useTranslation();
+
+  if (!ready) return <div>{t("shared.loading")}</div>;
+
   return (
     <>
       <Card
@@ -78,14 +83,14 @@ function Column({ column, updateColumn, deleteColumn }) {
               {column.name} ({incompleteTasks.length})
             </Typography>
             <Button color="secondary" onClick={() => setShowDeleteDialog(true)}>
-              Delete
+              {t("shared.delete")}
             </Button>
           </Box>
           <Box display="flex" gap={1} mb={2}>
             <TextField
               variant="outlined"
               size="small"
-              label="New Task"
+              label={t("column.newTask")}
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               sx={{ flexGrow: 1 }}
@@ -97,7 +102,7 @@ function Column({ column, updateColumn, deleteColumn }) {
               }}
             />
             <Button variant="contained" size="small" onClick={addTask}>
-              Add
+              {t("shared.add")}
             </Button>
           </Box>
           <Box>
@@ -111,12 +116,12 @@ function Column({ column, updateColumn, deleteColumn }) {
             ))}
           </Box>
           <Typography variant="subtitle2" mt={2}>
-            Completed: {completedTasks.length}{" "}
+            {t("column.completed")}: {completedTasks.length}{" "}
             <Button
               size="small"
               onClick={() => setShowCompleted(!showCompleted)}
             >
-              {showCompleted ? "Hide" : "Show"}
+              {showCompleted ? t("column.hide") : t("column.show")}
             </Button>
           </Typography>
           {showCompleted &&
@@ -133,8 +138,8 @@ function Column({ column, updateColumn, deleteColumn }) {
 
       <ConfirmationDialog
         open={showDeleteDialog}
-        title="Delete Column"
-        description="Are you sure you want to delete this column? All tasks within this column will also be deleted."
+        title={t("column.deleteTitle")}
+        description={t("column.deleteDescription")}
         onCancel={() => setShowDeleteDialog(false)}
         onConfirm={confirmDeleteColumn}
       />
