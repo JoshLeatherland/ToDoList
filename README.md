@@ -22,3 +22,7 @@ A straightforward and efficient to-do application that helps you organize your t
 - **Custom Themes:** Allow users to personalize the look and feel through the UI.
 
 ---
+
+## Access
+
+Experience the application firsthand by visiting the deployed version [here](https://main.d1py5cx9r2lg05.amplifyapp.com/).
