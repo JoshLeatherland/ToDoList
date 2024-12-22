@@ -8,6 +8,7 @@
       "remove": "Eliminar",
       "yes": "Sí",
       "no": "No",
+      "close": "Cerrar",
       "delete": "Eliminar",
       "defaultApplicationName": "ToDo"
     },
@@ -42,6 +43,15 @@
       "or": "O",
       "explore": "Explora el",
       "github": "repositorio de GitHub"
+    },
+    "share": {
+      "title": "Comparte Tus Datos",
+      "description": "Puedes compartir tus tareas enviando el enlace a continuación. Cuando alguien abra el enlace, podrá ver tus tareas exactamente como tú las ves.",
+      "notice": "Ten en cuenta que cualquier cambio realizado por la persona que abra el enlace solo se aplicará a su propia vista y no afectará tus tareas. De igual manera, cualquier cambio que realices no se reflejará en el enlace compartido.",
+      "shareableUrl": "URL Compartible",
+      "copy": "Haz clic en el ícono de copiar para copiar la URL.",
+      "importTitle": "Importar Datos desde URL",
+      "importDescription": "Hemos encontrado datos en la URL. ¿Te gustaría importarlos y sobrescribir tus tareas actuales?"
     }
   }
 }

@@ -8,6 +8,7 @@
       "remove": "Remove",
       "yes": "Yes",
       "no": "No",
+      "close": "Close",
       "delete": "Delete",
       "defaultApplicationName": "ToDo"
     },
@@ -42,6 +43,15 @@
       "or": "OR",
       "explore": "Explore the",
       "github": "GitHub repository"
+    },
+    "share": {
+      "title": "Share Your Data",
+      "description": "You can share your tasks by sending the link below. When someone opens the link, they'll be able to view your tasks exactly as you see them.",
+      "notice": "Please note that any changes made by the person opening the link will only apply to their own view, and will not affect your tasks. Likewise, any changes you make will not be reflected in the shared link.",
+      "shareableUrl": "Shareable URL",
+      "copy": "Click the copy icon to copy the URL.",
+      "importTitle": "Import Data from URL",
+      "importDescription": "We found data in the URL. Would you like to import it and overwrite your current tasks?"
     }
   }
 }
