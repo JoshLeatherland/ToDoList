@@ -26,4 +26,4 @@ A straightforward and efficient to-do application that helps you organize your t
 
 ## Access
 
-Experience the application firsthand by visiting the deployed version [here](https://main.d1py5cx9r2lg05.amplifyapp.com/).
+Experience the application firsthand by visiting the deployed version [here](https://joshleatherland.github.io/ToDoList/).
