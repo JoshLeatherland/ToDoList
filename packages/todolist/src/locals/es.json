@@ -4,18 +4,22 @@
       "loading": "Cargando...",
       "cancel": "Cancelar",
       "save": "Guardar",
-      "add": "Añadir",
+      "add": "Agregar",
       "remove": "Eliminar",
       "yes": "Sí",
       "no": "No",
       "close": "Cerrar",
       "delete": "Eliminar",
-      "defaultApplicationName": "ToDo"
+      "defaultApplicationName": "Tareas"
     },
     "settingsDialog": {
       "title": "Configuración",
       "columnHeading": "Gestionar Columnas",
-      "newColumn": "Nueva Columna"
+      "newColumn": "Nueva Columna",
+      "general": "General",
+      "columns": "Columnas",
+      "language": "Idioma",
+      "languagePreference": "Selecciona tu idioma preferido del menú desplegable arriba."
     },
     "task": {
       "comments": {
@@ -26,32 +30,35 @@
       "deleteTitle": "Eliminar Tarea",
       "deleteDescription": "¿Estás seguro de que deseas eliminar esta tarea? Esta acción no se puede deshacer.",
       "editTitle": "Editar Tarea",
-      "addComment": "Añadir un comentario"
+      "addComment": "Agregar un comentario"
     },
     "column": {
       "newTask": "Nueva Tarea",
-      "add": "Añadir",
+      "add": "Agregar",
       "completed": "Completado",
       "deleteTitle": "Eliminar Columna",
       "deleteDescription": "¿Estás seguro de que deseas eliminar esta columna? Todas las tareas dentro de esta columna también serán eliminadas.",
       "hide": "OCULTAR",
-      "show": "MOSTRAR"
+      "show": "MOSTRAR",
+      "taskCount": "Esta columna tiene {{tasks}} tareas.",
+      "noColumns": "Aún no hay columnas, comienza haciendo clic en el botón de agregar.",
+      "name": "Ingresa un nombre para esta columna."
     },
     "emptyState": {
-      "title": "¡Bienvenido a la aplicación To-Do!",
-      "getStarted": "Haz clic en el ícono de configuración en la parte superior derecha para comenzar añadiendo columnas.",
+      "title": "¡Bienvenido a la App de Tareas!",
+      "getStarted": "Haz clic en el ícono de configuración en la parte superior derecha para comenzar agregando columnas.",
       "or": "O",
       "explore": "Explora el",
       "github": "repositorio de GitHub"
     },
     "share": {
       "title": "Comparte Tus Datos",
-      "description": "Puedes compartir tus tareas enviando el enlace a continuación. Cuando alguien abra el enlace, podrá ver tus tareas exactamente como tú las ves.",
-      "notice": "Ten en cuenta que cualquier cambio realizado por la persona que abra el enlace solo se aplicará a su propia vista y no afectará tus tareas. De igual manera, cualquier cambio que realices no se reflejará en el enlace compartido.",
-      "shareableUrl": "URL Compartible",
-      "copy": "Haz clic en el ícono de copiar para copiar la URL.",
+      "description": "Puedes compartir tus tareas enviando el enlace a continuación. Cuando alguien abra el enlace, podrá ver tus tareas exactamente como las ves tú.",
+      "notice": "Ten en cuenta que cualquier cambio realizado por la persona que abra el enlace solo se aplicará a su propia vista y no afectará tus tareas. Del mismo modo, cualquier cambio que realices no se reflejará en el enlace compartido.",
+      "shareableUrl": "URL para compartir",
+      "copy": "Haz clic en el ícono de copiar para copiar el URL.",
       "importTitle": "Importar Datos desde URL",
-      "importDescription": "Hemos encontrado datos en la URL. ¿Te gustaría importarlos y sobrescribir tus tareas actuales?"
+      "importDescription": "Hemos encontrado datos en el URL. ¿Te gustaría importarlos y sobrescribir tus tareas actuales?"
     }
   }
 }

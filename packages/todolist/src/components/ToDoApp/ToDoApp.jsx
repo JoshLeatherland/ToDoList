@@ -31,24 +31,10 @@ function ToDoApp() {
     checkDataInUrl();
   }, []);
 
-  const addColumn = () => {
-    if (newColumnName.trim() === "") return;
-    setColumns([
-      ...columns,
-      { id: Date.now(), name: newColumnName, tasks: [] },
-    ]);
-    setNewColumnName("");
-    setSettingsDialogOpen(false);
-  };
-
   const updateColumn = (id, updatedColumn) => {
     setColumns(
       columns.map((column) => (column.id === id ? updatedColumn : column))
     );
-  };
-
-  const deleteColumn = (id) => {
-    setColumns(columns.filter((column) => column.id !== id));
   };
 
   const checkDataInUrl = () => {
@@ -119,9 +105,8 @@ function ToDoApp() {
         <SettingsDialog
           open={settingsDialogOpen}
           onClose={() => setSettingsDialogOpen(false)}
-          newColumnName={newColumnName}
-          onColumnNameChange={(e) => setNewColumnName(e.target.value)}
-          onAddColumn={addColumn}
+          columns={columns}
+          setColumns={setColumns}
         />
 
         <ShareDialog
@@ -131,11 +116,7 @@ function ToDoApp() {
         />
 
         {columns.length > 0 ? (
-          <ColumnGrid
-            columns={columns}
-            updateColumn={updateColumn}
-            deleteColumn={deleteColumn}
-          />
+          <ColumnGrid columns={columns} updateColumn={updateColumn} />
         ) : (
           <EmptyState />
         )}

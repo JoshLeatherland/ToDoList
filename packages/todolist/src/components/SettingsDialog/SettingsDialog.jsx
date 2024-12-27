@@ -1,60 +1,57 @@
-import React from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
-  TextField,
   DialogActions,
   Button,
-  Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { TabContainer } from "../../components";
+import { useTheme } from "@emotion/react";
+import Language from "./Language";
+import Columns from "./Columns";
 
-function ColumnAddDialog({
-  open,
-  onClose,
-  newColumnName,
-  onColumnNameChange,
-  onAddColumn,
-}) {
+function SettingsDialog({ open, onClose, columns, setColumns }) {
   const { t, ready } = useTranslation();
 
   if (!ready) return <div>{t("shared.loading")}</div>;
+
+  const theme = useTheme();
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
       <DialogTitle>{t("settingsDialog.title")}:</DialogTitle>
       <DialogContent>
-        <Typography variant="h6" gutterBottom>
-          {t("settingsDialog.columnHeading")}:
-        </Typography>
-        <TextField
-          label={t("settingsDialog.newColumn")}
-          variant="outlined"
-          fullWidth
-          value={newColumnName}
-          onChange={onColumnNameChange}
+        <TabContainer
+          orientation="horizontal"
+          tabs={[
+            {
+              content: <Columns columns={columns} setColumns={setColumns} />,
+              label: t("settingsDialog.columns"),
+            },
+            {
+              content: <Language />,
+              label: t("settingsDialog.language"),
+            },
+          ]}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
-          {t("shared.cancel")}
-        </Button>
-        <Button onClick={onAddColumn} color="primary">
-          {t("shared.save")}
+          {t("shared.close")}
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-export default ColumnAddDialog;
+export default SettingsDialog;
 
-ColumnAddDialog.propTypes = {
+SettingsDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
-  newColumnName: PropTypes.string,
-  onColumnNameChange: PropTypes.func,
-  onAddColumn: PropTypes.func,
+  columns: PropTypes.array,
+  setColumns: PropTypes.func,
 };
