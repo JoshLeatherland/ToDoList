@@ -10,13 +10,11 @@ import {
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import Task from "../Task";
-import ConfirmationDialog from "../ConfirmationDialog";
 import { useTranslation } from "react-i18next";
 
-function Column({ column, updateColumn, deleteColumn }) {
+function Column({ column, updateColumn }) {
   const [newTask, setNewTask] = useState("");
   const [showCompleted, setShowCompleted] = useState(false);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const theme = useTheme();
 
@@ -51,11 +49,6 @@ function Column({ column, updateColumn, deleteColumn }) {
     updateColumn(column.id, { ...column, tasks: updatedTasks });
   };
 
-  const confirmDeleteColumn = () => {
-    deleteColumn(column.id);
-    setShowDeleteDialog(false);
-  };
-
   const completedTasks = column.tasks.filter((task) => task.completed);
   const incompleteTasks = column.tasks.filter((task) => !task.completed);
 
@@ -82,9 +75,6 @@ function Column({ column, updateColumn, deleteColumn }) {
             <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
               {column.name} ({incompleteTasks.length})
             </Typography>
-            <Button color="secondary" onClick={() => setShowDeleteDialog(true)}>
-              {t("shared.delete")}
-            </Button>
           </Box>
           <Box display="flex" gap={1} mb={2}>
             <TextField
@@ -135,14 +125,6 @@ function Column({ column, updateColumn, deleteColumn }) {
             ))}
         </CardContent>
       </Card>
-
-      <ConfirmationDialog
-        open={showDeleteDialog}
-        title={t("column.deleteTitle")}
-        description={t("column.deleteDescription")}
-        onCancel={() => setShowDeleteDialog(false)}
-        onConfirm={confirmDeleteColumn}
-      />
     </>
   );
 }
@@ -170,5 +152,4 @@ Column.propTypes = {
     ).isRequired,
   }).isRequired,
   updateColumn: PropTypes.func.isRequired,
-  deleteColumn: PropTypes.func.isRequired,
 };

@@ -15,7 +15,11 @@
     "settingsDialog": {
       "title": "Settings",
       "columnHeading": "Manage Columns",
-      "newColumn": "New Column"
+      "newColumn": "New Column",
+      "general": "General",
+      "columns": "Columns",
+      "language": "Language",
+      "languagePreference": "Select your preferred language from the dropdown above."
     },
     "task": {
       "comments": {
@@ -35,7 +39,10 @@
       "deleteTitle": "Delete Column",
       "deleteDescription": "Are you sure you want to delete this column? All tasks within this column will also be deleted.",
       "hide": "HIDE",
-      "show": "SHOW"
+      "show": "SHOW",
+      "taskCount": "This column has {{tasks}} tasks.",
+      "noColumns": "No columns yet, get started by clicking the add button.",
+      "name": "Enter a name for this column."
     },
     "emptyState": {
       "title": "Welcome to the To-Do App!",
