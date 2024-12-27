@@ -7,10 +7,19 @@
     "./packages/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "cd packages/todolist && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && gh-pages -d packages/todolist/dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "gh-pages": "^6.2.0",
+    "vite": "^4.0.0"
+  }
 }
