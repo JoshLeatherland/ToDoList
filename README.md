@@ -19,7 +19,6 @@ A straightforward and efficient to-do application that helps you organize your t
 ## Future Enhancements
 
 - **Multi-language Support:** Continue to support more languages and allow in-app switching.
-- **Enhanced Settings UI:** Improve the user interface for the settings page.
 - **Custom Themes:** Allow users to personalize the look and feel through the UI.
 - **Data Storage** Update the application to use indexed DB instead of local storage.
 
