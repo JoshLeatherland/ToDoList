@@ -21,7 +21,11 @@ function ShareScreen({ data, open, onClose }) {
 
   const generateShareUrl = () => {
     const encodedData = encodeData(data);
-    const url = `${window.location.origin}?data=${encodedData}`;
+    const pathname = window.location.pathname;
+    const baseUrl = pathname
+      ? `${window.location.origin}${pathname}`
+      : window.location.origin;
+    const url = `${baseUrl}?data=${encodedData}`;
     setShareUrl(url);
   };
 
