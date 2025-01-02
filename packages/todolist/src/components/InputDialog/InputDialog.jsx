@@ -43,6 +43,8 @@ function TextInputDialog({
       PaperProps={{
         sx: { minWidth: "400px" },
       }}
+      fullWidth
+      maxWidth="md"
     >
       <DialogTitle id="text-input-dialog-title">{title}</DialogTitle>
       <DialogContent>
