@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 
 function Column({ column, updateColumn }) {
   const [newTask, setNewTask] = useState("");
-  const [showCompleted, setShowCompleted] = useState(false);
 
   const theme = useTheme();
 
@@ -109,12 +108,17 @@ function Column({ column, updateColumn }) {
             {t("column.completed")}: {completedTasks.length}{" "}
             <Button
               size="small"
-              onClick={() => setShowCompleted(!showCompleted)}
+              onClick={() => {
+                updateColumn(column.id, {
+                  ...column,
+                  showCompleted: !column.showCompleted,
+                });
+              }}
             >
-              {showCompleted ? t("column.hide") : t("column.show")}
+              {column.showCompleted ? t("column.hide") : t("column.show")}
             </Button>
           </Typography>
-          {showCompleted &&
+          {column.showCompleted &&
             completedTasks.map((task) => (
               <Task
                 key={task.id}
