@@ -113,7 +113,6 @@ function Column({ column, updateColumn }) {
                   ...column,
                   showCompleted: !column.showCompleted,
                 });
-                setShowCompleted(!column.showCompleted);
               }}
             >
               {column.showCompleted ? t("column.hide") : t("column.show")}
