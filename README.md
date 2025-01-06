@@ -24,6 +24,6 @@ A straightforward and efficient to-do application that helps you organize your t
 
 ---
 
-## Access
+## Demo
 
 Experience the application firsthand by visiting the deployed version [here](https://joshleatherland.github.io/ToDoList/).
