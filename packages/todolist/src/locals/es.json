@@ -30,7 +30,9 @@
       "deleteTitle": "Eliminar Tarea",
       "deleteDescription": "¿Estás seguro de que deseas eliminar esta tarea? Esta acción no se puede deshacer.",
       "editTitle": "Editar Tarea",
-      "addComment": "Agregar un comentario"
+      "addComment": "Agregar un comentario",
+      "blur": "Desenfocar Tareas",
+      "show": "Mostrar Tareas"
     },
     "column": {
       "newTask": "Nueva Tarea",
