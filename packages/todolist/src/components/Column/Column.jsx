@@ -7,10 +7,13 @@ import {
   CardContent,
   TextField,
   Typography,
+  IconButton,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import Task from "../Task";
 import { useTranslation } from "react-i18next";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Column({ column, updateColumn }) {
   const [newTask, setNewTask] = useState("");
@@ -48,6 +51,13 @@ function Column({ column, updateColumn }) {
     updateColumn(column.id, { ...column, tasks: updatedTasks });
   };
 
+  const toggleBlurTasks = () => {
+    updateColumn(column.id, {
+      ...column,
+      blurTasks: !column.blurTasks,
+    });
+  };
+
   const completedTasks = column.tasks.filter((task) => task.completed);
   const incompleteTasks = column.tasks.filter((task) => !task.completed);
 
@@ -74,6 +84,14 @@ function Column({ column, updateColumn }) {
             <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
               {column.name} ({incompleteTasks.length})
             </Typography>
+
+            <IconButton onClick={() => toggleBlurTasks()}>
+              {column.blurTasks ? (
+                <VisibilityIcon titleAccess={t("task.show")} />
+              ) : (
+                <VisibilityOffIcon titleAccess={t("task.blur")} />
+              )}
+            </IconButton>
           </Box>
           <Box display="flex" gap={1} mb={2}>
             <TextField
@@ -94,7 +112,12 @@ function Column({ column, updateColumn }) {
               {t("shared.add")}
             </Button>
           </Box>
-          <Box>
+          <Box
+            sx={{
+              filter: column.blurTasks ? "blur(5px)" : "none",
+              transition: "filter 0.3s ease",
+            }}
+          >
             {incompleteTasks.map((task) => (
               <Task
                 key={task.id}
@@ -118,15 +141,24 @@ function Column({ column, updateColumn }) {
               {column.showCompleted ? t("column.hide") : t("column.show")}
             </Button>
           </Typography>
-          {column.showCompleted &&
-            completedTasks.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                onUpdateTask={(updatedTask) => updateTask(task.id, updatedTask)}
-                onDeleteTask={() => deleteTask(task.id)}
-              />
-            ))}
+          <Box
+            sx={{
+              filter: column.blurTasks ? "blur(5px)" : "none",
+              transition: "filter 0.3s ease",
+            }}
+          >
+            {column.showCompleted &&
+              completedTasks.map((task) => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  onUpdateTask={(updatedTask) =>
+                    updateTask(task.id, updatedTask)
+                  }
+                  onDeleteTask={() => deleteTask(task.id)}
+                />
+              ))}
+          </Box>
         </CardContent>
       </Card>
     </>
