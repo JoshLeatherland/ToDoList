@@ -5,11 +5,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { ConfirmationDialog } from "../../../components";
+import { ConfirmationDialog, InputDialog } from "../../../components";
 
 function ListColumns({ columns = [], setColumns }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedColumn, setSelectedColumn] = useState({});
+  const [selectedColumnEdit, setSelectedColumnEdit] = useState(null);
 
   const theme = useTheme();
 
@@ -18,6 +19,19 @@ function ListColumns({ columns = [], setColumns }) {
   const deleteColumn = (id) => {
     setColumns(columns.filter((column) => column.id !== id));
     setShowDeleteDialog(false);
+  };
+
+  const handleEditColumn = (newName) => {
+    if (selectedColumnEdit && newName.trim() !== "") {
+      setColumns(
+        columns.map((column) =>
+          column.id === selectedColumnEdit.id
+            ? { ...column, name: newName }
+            : column
+        )
+      );
+    }
+    setSelectedColumnEdit(null);
   };
 
   if (!ready) return <div>{t("shared.loading")}</div>;
@@ -57,9 +71,16 @@ function ListColumns({ columns = [], setColumns }) {
                 </Box>
 
                 <Box>
-                  {/* <IconButton color="primary" size="small" onClick={() => ({})}>
-                  <EditIcon />
-                </IconButton> */}
+                  <IconButton
+                    color="primary"
+                    size="small"
+                    onClick={() => {
+                      setSelectedColumnEdit(column);
+                      console.log(column);
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
                   <IconButton
                     color="secondary"
                     size="small"
@@ -100,6 +121,17 @@ function ListColumns({ columns = [], setColumns }) {
         onCancel={() => setShowDeleteDialog(false)}
         onConfirm={() => deleteColumn(selectedColumn.id)}
       />
+
+      {selectedColumnEdit && (
+        <InputDialog
+          open={Boolean(selectedColumnEdit)}
+          title={t("column.edit")}
+          label={t("column.name")}
+          initialValue={selectedColumnEdit?.name}
+          onConfirm={(val) => handleEditColumn(val)}
+          onClose={() => setSelectedColumnEdit(null)}
+        />
+      )}
     </>
   );
 }
