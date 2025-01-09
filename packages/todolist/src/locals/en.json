@@ -44,7 +44,8 @@
       "show": "SHOW",
       "taskCount": "This column has {{tasks}} tasks.",
       "noColumns": "No columns yet, get started by clicking the add button.",
-      "name": "Enter a name for this column."
+      "name": "Enter a name for this column.",
+      "edit": "Edit"
     },
     "emptyState": {
       "title": "Welcome to the To-Do App!",

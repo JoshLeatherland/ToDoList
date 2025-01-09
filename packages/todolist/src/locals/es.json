@@ -44,7 +44,8 @@
       "show": "MOSTRAR",
       "taskCount": "Esta columna tiene {{tasks}} tareas.",
       "noColumns": "Aún no hay columnas, comienza haciendo clic en el botón de agregar.",
-      "name": "Ingresa un nombre para esta columna."
+      "name": "Ingresa un nombre para esta columna.",
+      "edit": "Editar"
     },
     "emptyState": {
       "title": "¡Bienvenido a la App de Tareas!",
