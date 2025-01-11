@@ -6,8 +6,11 @@ function ColumnGrid({ columns, updateColumn }) {
   return (
     <Grid2 container spacing={2}>
       {columns.map((column) => (
-        <Grid2 item xs={12} sm={6} md={4} key={column.id}>
-          <Column column={column} updateColumn={updateColumn} />
+        <Grid2 size={{ xs: 12, sm: 6, md: 4, xl: 3 }} key={column.id}>
+          <Column
+            column={{ ...column, tasks: column.tasks || [] }}
+            updateColumn={updateColumn}
+          />
         </Grid2>
       ))}
     </Grid2>
@@ -17,7 +20,9 @@ function ColumnGrid({ columns, updateColumn }) {
 ColumnGrid.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      tasks: PropTypes.array, // optional, will default to an empty array if undefined
     })
   ).isRequired,
   updateColumn: PropTypes.func.isRequired,

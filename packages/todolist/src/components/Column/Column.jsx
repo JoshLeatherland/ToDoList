@@ -171,8 +171,8 @@ Column.propTypes = {
   column: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    blurTasks: PropTypes.bool.isRequired,
-    showCompleted: PropTypes.bool.isRequired,
+    blurTasks: PropTypes.bool,
+    showCompleted: PropTypes.bool,
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,

@@ -86,7 +86,7 @@ function ShareScreen({ data, open, onClose }) {
   );
 }
 ShareScreen.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
