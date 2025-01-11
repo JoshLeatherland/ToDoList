@@ -11,6 +11,7 @@ import { TabContainer } from "../../components";
 import { useTheme } from "@emotion/react";
 import Language from "./Language";
 import Columns from "./Columns";
+import Stats from "./Stats";
 
 function SettingsDialog({ open, onClose, columns, setColumns }) {
   const { t, ready } = useTranslation();
@@ -33,6 +34,10 @@ function SettingsDialog({ open, onClose, columns, setColumns }) {
             {
               content: <Language />,
               label: t("settingsDialog.language"),
+            },
+            {
+              content: <Stats columns={columns} />,
+              label: t("settingsDialog.stats"),
             },
           ]}
         />

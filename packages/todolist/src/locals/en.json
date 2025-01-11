@@ -19,6 +19,15 @@
       "general": "General",
       "columns": "Columns",
       "language": "Language",
+      "stats": "Stats",
+      "statsChart": {
+        "startDateLabel": "Start Date",
+        "chartTitle": "To-Do List Activity Chart",
+        "datasets": {
+          "added": "Tasks Added",
+          "completed": "Tasks Completed"
+        }
+      },
       "languagePreference": "Select your preferred language from the dropdown above."
     },
     "task": {
