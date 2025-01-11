@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   Button,
   Dialog,
@@ -84,5 +85,10 @@ function ShareScreen({ data, open, onClose }) {
     </Dialog>
   );
 }
+ShareScreen.propTypes = {
+  data: PropTypes.array,
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default ShareScreen;
