@@ -12,7 +12,7 @@ function Language() {
   const { t, ready, i18n } = useTranslation();
 
   const languages = [
-    { code: "en", name: "English" },
+    { code: "en-GB", name: "English" },
     { code: "es", name: "Spanish" },
   ];
 

@@ -32,7 +32,11 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
   const theme = useTheme();
 
   const toggleComplete = () => {
-    onUpdateTask({ ...task, completed: !task.completed });
+    onUpdateTask({
+      ...task,
+      completed: !task.completed,
+      completedDate: !task.completed ? new Date().toLocaleString() : null,
+    });
   };
 
   const confirmDelete = () => {

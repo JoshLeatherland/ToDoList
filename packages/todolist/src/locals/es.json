@@ -19,6 +19,15 @@
       "general": "General",
       "columns": "Columnas",
       "language": "Idioma",
+      "stats": "Estadísticas",
+      "statsChart": {
+        "startDateLabel": "Fecha de Inicio",
+        "chartTitle": "Gráfico de Actividad de la Lista de Tareas",
+        "datasets": {
+          "added": "Tareas Agregadas",
+          "completed": "Tareas Completadas"
+        }
+      },
       "languagePreference": "Selecciona tu idioma preferido del menú desplegable arriba."
     },
     "task": {
