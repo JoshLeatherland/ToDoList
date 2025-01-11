@@ -9,12 +9,33 @@ A straightforward and efficient to-do application that helps you organize your t
 
 ## Features
 
-- Create custom columns for organizing tasks.
-- Add comments to individual tasks for better context.
-- Mark tasks as complete to track your progress.
-- Task count indicators for completed and incomplete tasks per column.
-- Multi-Language Support (currently English and Spanish).
-- Share your tasks and columns via a generated Data URL.
+### Create custom columns for organizing tasks
+
+![Custom Columns](docs/images/custom_columns.png)
+
+### Add comments to individual tasks for better context
+
+![Add Comments](docs/images/comments.png)
+
+### Mark tasks as complete to track your progress
+
+![Mark Completed](docs/images/mark_completed.png)
+
+### Task count indicators for completed and incomplete tasks per column
+
+![Task Count](docs/images/count_indicators.png)
+
+### Multi-Language Support (currently English and Spanish)
+
+![Language Support](docs/images/language_support.png)
+
+### Share your tasks and columns via a generated Data URL
+
+![Data Share](docs/images/data_share.png)
+
+### View your daily completion performance
+
+![Stats Chart](docs/images/stats_graph.png)
 
 ## Future Enhancements
 
