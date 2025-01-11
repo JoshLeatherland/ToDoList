@@ -32,6 +32,12 @@ function TabPanel(props) {
   );
 }
 
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  value: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+};
+
 function TabContainer({
   tabs = [],
   textColor = "primary",

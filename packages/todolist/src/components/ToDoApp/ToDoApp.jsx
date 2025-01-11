@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import {
@@ -17,7 +17,6 @@ function ToDoApp() {
   const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
-  const [newColumnName, setNewColumnName] = useState("");
   const [columns, setColumns] = useState(() => {
     const savedColumns = localStorage.getItem("columns");
     return savedColumns ? JSON.parse(savedColumns) : [];

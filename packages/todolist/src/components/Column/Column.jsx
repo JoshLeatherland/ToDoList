@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -171,6 +171,8 @@ Column.propTypes = {
   column: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    blurTasks: PropTypes.bool.isRequired,
+    showCompleted: PropTypes.bool.isRequired,
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
