@@ -1,0 +1,76 @@
+{
+  "translation": {
+    "shared": {
+      "loading": "Laden...",
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "add": "Hinzufügen",
+      "remove": "Entfernen",
+      "yes": "Ja",
+      "no": "Nein",
+      "close": "Schließen",
+      "delete": "Löschen",
+      "defaultApplicationName": "ToDo"
+    },
+    "settingsDialog": {
+      "title": "Einstellungen",
+      "columnHeading": "Spalten verwalten",
+      "newColumn": "Neue Spalte",
+      "general": "Allgemein",
+      "columns": "Spalten",
+      "language": "Sprache",
+      "stats": "Statistiken",
+      "statsChart": {
+        "startDateLabel": "Startdatum",
+        "chartTitle": "Aktivitätsdiagramm der To-Do-Liste",
+        "datasets": {
+          "added": "Hinzugefügte Aufgaben",
+          "completed": "Erledigte Aufgaben"
+        }
+      },
+      "languagePreference": "Wählen Sie Ihre bevorzugte Sprache aus dem Dropdown-Menü oben aus."
+    },
+    "task": {
+      "comments": {
+        "pascal": "Kommentare",
+        "camel": "kommentare"
+      },
+      "name": "Aufgabenname",
+      "deleteTitle": "Aufgabe löschen",
+      "deleteDescription": "Möchten Sie diese Aufgabe wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "editTitle": "Aufgabe bearbeiten",
+      "addComment": "Einen Kommentar hinzufügen",
+      "blur": "Aufgaben ausblenden",
+      "show": "Aufgaben anzeigen"
+    },
+    "column": {
+      "newTask": "Neue Aufgabe",
+      "add": "Hinzufügen",
+      "completed": "Erledigt",
+      "deleteTitle": "Spalte löschen",
+      "deleteDescription": "Möchten Sie diese Spalte wirklich löschen? Alle Aufgaben in dieser Spalte werden ebenfalls gelöscht.",
+      "hide": "AUSBLENDEN",
+      "show": "ANZEIGEN",
+      "taskCount": "Diese Spalte enthält {{tasks}} Aufgaben.",
+      "noColumns": "Noch keine Spalten vorhanden, starten Sie, indem Sie auf die Hinzufügen-Schaltfläche klicken.",
+      "name": "Geben Sie einen Namen für diese Spalte ein.",
+      "edit": "Bearbeiten"
+    },
+    "emptyState": {
+      "title": "Willkommen in der To-Do-App!",
+      "getStarted": "Klicken Sie auf das Einstellungs-Symbol oben rechts, um Spalten hinzuzufügen.",
+      "or": "ODER",
+      "explore": "Erkunden Sie das",
+      "github": "GitHub-Repository"
+    },
+    "share": {
+      "title": "Teilen Sie Ihre Daten",
+      "description": "Sie können Ihre Aufgaben teilen, indem Sie den untenstehenden Link senden. Wenn jemand den Link öffnet, kann er Ihre Aufgaben genauso sehen, wie Sie sie sehen.",
+      "notice": "Bitte beachten Sie, dass Änderungen, die von der Person vorgenommen werden, die den Link öffnet, nur für deren Ansicht gelten und Ihre Aufgaben nicht beeinflussen. Ebenso werden Änderungen, die Sie vornehmen, im geteilten Link nicht reflektiert.",
+      "shareableUrl": "Teilbarer URL",
+      "copy": "Klicken Sie auf das Kopieren-Symbol, um die URL zu kopieren.",
+      "importTitle": "Daten aus URL importieren",
+      "importDescription": "Wir haben Daten in der URL gefunden. Möchten Sie diese importieren und Ihre aktuellen Aufgaben überschreiben?"
+    }
+  }
+}

@@ -8,13 +8,10 @@ import {
   Box,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { availableLanguages } from "../../../utils";
+
 function Language() {
   const { t, ready, i18n } = useTranslation();
-
-  const languages = [
-    { code: "en-GB", name: "English" },
-    { code: "es", name: "Spanish" },
-  ];
 
   const handleLanguageChange = (lng) => {
     i18n.changeLanguage(lng);
@@ -36,7 +33,7 @@ function Language() {
               borderRadius: 1,
             }}
           >
-            {languages.map((language) => (
+            {availableLanguages.map((language) => (
               <MenuItem key={language.code} value={language.code}>
                 {language.name}
               </MenuItem>
