@@ -25,6 +25,10 @@ A straightforward and efficient to-do application that helps you organize your t
 
 ![Task Count](docs/images/count_indicators.png)
 
+### Columns can be blurred for added privacy
+
+![Stats Chart](docs/images/blur_tasks.png)
+
 ### Multi-Language Support (currently English and Spanish)
 
 ![Language Support](docs/images/language_support.png)
@@ -42,6 +46,10 @@ A straightforward and efficient to-do application that helps you organize your t
 - **Multi-language Support:** Continue to support more languages and allow in-app switching.
 - **Custom Themes:** Allow users to personalize the look and feel through the UI.
 - **Data Storage** Update the application to use indexed DB instead of local storage.
+- **Task Re-Ordering** Implement drag and drop re-ordering on tasks like we do for columns.
+- **Edit Task UI** Update the edit task UI as its looking a little plain.
+- **App Title Name** Give the ability to change the name of the application that gets displayed in the appbar.
+- **Label and Priority** Introduce the ability to add labels onto work items, and set a priority.
 
 ---
 
