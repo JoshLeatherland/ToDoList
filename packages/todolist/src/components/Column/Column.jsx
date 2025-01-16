@@ -14,8 +14,10 @@ import Task from "../Task";
 import { useTranslation } from "react-i18next";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { DragDropContext } from "react-beautiful-dnd";
+import SortableTasks from "./SortableTasks.jsx";
 
-function Column({ column, updateColumn }) {
+function Column({ column, updateColumn, columnIndex }) {
   const [newTask, setNewTask] = useState("");
 
   const theme = useTheme();
@@ -56,6 +58,34 @@ function Column({ column, updateColumn }) {
       ...column,
       blurTasks: !column.blurTasks,
     });
+  };
+
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+    if (!destination) return;
+
+    const isSourceCompleted = source.droppableId === `completed-${columnIndex}`;
+    const isDestCompleted =
+      destination.droppableId === `completed-${columnIndex}`;
+
+    // make sure dragging only between matching sections, i.e same col
+    if (isSourceCompleted !== isDestCompleted) return;
+
+    const tasks = column.tasks.filter((task) =>
+      isSourceCompleted ? task.completed : !task.completed
+    );
+
+    const reorderedTask = tasks.splice(source.index, 1)[0];
+    tasks.splice(destination.index, 0, reorderedTask);
+
+    const updatedColumn = {
+      ...column,
+      tasks: column.tasks.map((task) =>
+        task.completed === isSourceCompleted ? tasks.shift() : task
+      ),
+    };
+
+    updateColumn(column.id, updatedColumn);
   };
 
   const completedTasks = column.tasks.filter((task) => task.completed);
@@ -118,14 +148,15 @@ function Column({ column, updateColumn }) {
               transition: "filter 0.3s ease",
             }}
           >
-            {incompleteTasks.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                onUpdateTask={(updatedTask) => updateTask(task.id, updatedTask)}
-                onDeleteTask={() => deleteTask(task.id)}
+            <DragDropContext onDragEnd={onDragEnd}>
+              <SortableTasks
+                tasks={incompleteTasks}
+                droppableId={`incomplete-${columnIndex}`}
+                blur={column.blurTasks}
+                onUpdateTask={updateTask}
+                onDeleteTask={deleteTask}
               />
-            ))}
+            </DragDropContext>
           </Box>
           <Typography variant="subtitle2" mt={2}>
             {t("column.completed")}: {completedTasks.length}{" "}
@@ -190,4 +221,5 @@ Column.propTypes = {
     ).isRequired,
   }).isRequired,
   updateColumn: PropTypes.func.isRequired,
+  columnIndex: PropTypes.number,
 };
