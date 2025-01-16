@@ -5,11 +5,12 @@ import Column from "../Column";
 function ColumnGrid({ columns, updateColumn }) {
   return (
     <Grid2 container spacing={2}>
-      {columns.map((column) => (
+      {columns.map((column, index) => (
         <Grid2 size={{ xs: 12, sm: 6, md: 4, xl: 3 }} key={column.id}>
           <Column
             column={{ ...column, tasks: column.tasks || [] }}
             updateColumn={updateColumn}
+            columnIndex={index}
           />
         </Grid2>
       ))}
