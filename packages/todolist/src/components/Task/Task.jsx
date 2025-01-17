@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -26,6 +26,9 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [taskName, setTaskName] = useState(task.text);
+  const [taskDescription, setTaskDescription] = useState(
+    task.description || ""
+  );
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([...task.comments]);
 
@@ -44,14 +47,18 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
     setShowDeleteDialog(false);
   };
 
-  const saveTaskChanges = () => {
+  const saveTaskChanges = (closeDialog = true) => {
     const updatedTask = {
       ...task,
       text: taskName,
+      description: taskDescription,
       comments,
     };
     onUpdateTask(updatedTask);
-    setShowEditDialog(false);
+
+    if (closeDialog) {
+      setShowEditDialog(false);
+    }
   };
 
   const addComment = () => {
@@ -65,6 +72,7 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
 
     setComments([newCommentObj, ...comments]);
     setNewComment("");
+    saveTaskChanges(false);
   };
 
   const { t, ready } = useTranslation();
@@ -146,25 +154,50 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
       <Dialog
         open={showEditDialog}
         onClose={() => setShowEditDialog(false)}
-        maxWidth="sm"
+        maxWidth="md"
         fullWidth
       >
         <DialogTitle>{t("task.editTitle")}</DialogTitle>
         <DialogContent>
           <TextField
             fullWidth
+            variant="outlined"
             label={t("task.name")}
             value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                saveTaskChanges();
+              }
+            }}
             margin="normal"
           />
+          {/* may eventually make this a WYSIWYG */}
+          <TextField
+            fullWidth
+            variant="outlined"
+            label={t("task.description")}
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                saveTaskChanges();
+              }
+            }}
+            margin="normal"
+            multiline={true}
+            minRows={5}
+          />
 
-          <Typography variant="h6" mt={2}>
+          <Typography variant="subtitle2" mt={2} mb={1}>
             {t("task.comments.pascal")}
           </Typography>
           <Box display="flex" gap={1} mb={2}>
             <TextField
               fullWidth
+              variant="standard"
               label={t("task.addComment")}
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
@@ -175,11 +208,10 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
                 }
               }}
             />
-            <Button variant="contained" onClick={addComment}>
+            <Button variant="text" onClick={addComment}>
               {t("shared.add")}
             </Button>
           </Box>
-
           <List>
             {comments.map((comment) => (
               <ListItem key={comment.id} disablePadding>

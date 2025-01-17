@@ -36,6 +36,7 @@
         "camel": "comentarios"
       },
       "name": "Nombre de la Tarea",
+      "description": "Descripción",
       "deleteTitle": "Eliminar Tarea",
       "deleteDescription": "¿Estás seguro de que deseas eliminar esta tarea? Esta acción no se puede deshacer.",
       "editTitle": "Editar Tarea",
