@@ -182,8 +182,7 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
             onChange={(e) => setTaskDescription(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                e.preventDefault();
-                saveTaskChanges();
+                saveTaskChanges(false);
               }
             }}
             margin="normal"
