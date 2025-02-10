@@ -35,7 +35,8 @@ function ScrollableTasks({
           {...provided.droppableProps}
           ref={provided.innerRef}
           sx={{
-            maxHeight: "400px",
+            minHeight: "18rem",
+            maxHeight: "18rem",
             overflowY: "auto",
             filter: blur ? "blur(5px)" : "none",
             transition: "filter 0.3s ease",

@@ -142,22 +142,25 @@ function Column({ column, updateColumn, columnIndex }) {
               {t("shared.add")}
             </Button>
           </Box>
-          <Box
-            sx={{
-              filter: column.blurTasks ? "blur(5px)" : "none",
-              transition: "filter 0.3s ease",
-            }}
-          >
-            <DragDropContext onDragEnd={onDragEnd}>
-              <SortableTasks
-                tasks={incompleteTasks}
-                droppableId={`incomplete-${columnIndex}`}
-                blur={column.blurTasks}
-                onUpdateTask={updateTask}
-                onDeleteTask={deleteTask}
-              />
-            </DragDropContext>
-          </Box>
+          {Boolean(incompleteTasks.length) && (
+            <Box
+              sx={{
+                filter: column.blurTasks ? "blur(5px)" : "none",
+                transition: "filter 0.3s ease",
+              }}
+            >
+              <DragDropContext onDragEnd={onDragEnd}>
+                <SortableTasks
+                  tasks={incompleteTasks}
+                  droppableId={`incomplete-${columnIndex}`}
+                  blur={column.blurTasks}
+                  onUpdateTask={updateTask}
+                  onDeleteTask={deleteTask}
+                />
+              </DragDropContext>
+            </Box>
+          )}
+
           <Typography variant="subtitle2" mt={2}>
             {t("column.completed")}: {completedTasks.length}{" "}
             <Button
