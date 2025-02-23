@@ -13,7 +13,7 @@ import Language from "./Language";
 import Columns from "./Columns";
 import Stats from "./Stats";
 
-function SettingsDialog({ open, onClose, columns, setColumns }) {
+function SettingsDialog({ open, onClose, columns, updateColumns }) {
   const { t, ready } = useTranslation();
 
   if (!ready) return <div>{t("shared.loading")}</div>;
@@ -28,7 +28,9 @@ function SettingsDialog({ open, onClose, columns, setColumns }) {
           orientation="horizontal"
           tabs={[
             {
-              content: <Columns columns={columns} setColumns={setColumns} />,
+              content: (
+                <Columns columns={columns} updateColumns={updateColumns} />
+              ),
               label: t("settingsDialog.columns"),
             },
             {
@@ -57,5 +59,5 @@ SettingsDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   columns: PropTypes.array,
-  setColumns: PropTypes.func,
+  updateColumns: PropTypes.func,
 };

@@ -1,40 +1,17 @@
 import { useState } from "react";
 import { Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import {
-  Navbar,
-  SettingsDialog,
-  ColumnGrid,
-  EmptyState,
-  ShareDialog,
-  ConfirmationDialog,
-} from "../../components";
+import { ColumnGrid, EmptyState, ConfirmationDialog } from "../../components";
 import { useEffect } from "react";
 import { decodeData } from "../../utils/base64";
 import { useTranslation } from "react-i18next";
 
-function ToDoApp() {
+function ToDoApp({ columns, updateColumns, updateColumn }) {
   const [importDialogOpen, setImportDialogOpen] = useState(false);
-  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
-  const [shareDialogOpen, setShareDialogOpen] = useState(false);
-  const [columns, setColumns] = useState(() => {
-    const savedColumns = localStorage.getItem("columns");
-    return savedColumns ? JSON.parse(savedColumns) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("columns", JSON.stringify(columns));
-  }, [columns]);
 
   useEffect(() => {
     checkDataInUrl();
   }, []);
-
-  const updateColumn = (id, updatedColumn) => {
-    setColumns(
-      columns.map((column) => (column.id === id ? updatedColumn : column))
-    );
-  };
 
   const checkDataInUrl = () => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -48,7 +25,7 @@ function ToDoApp() {
   const importDataFromUrl = (encodedData) => {
     try {
       const decodedData = decodeData(encodedData);
-      setColumns(decodedData);
+      updateColumns(decodedData);
     } catch (error) {
       console.error("Error decoding data:", error);
     }
@@ -86,12 +63,6 @@ function ToDoApp() {
         backgroundColor: theme.palette.backgrounds.main,
       }}
     >
-      <Navbar
-        onSettingsClick={() => setSettingsDialogOpen(true)}
-        onShareClick={() => setShareDialogOpen(true)}
-        canShare={Boolean(columns?.length)}
-      />
-
       <ConfirmationDialog
         open={importDialogOpen}
         title={t("share.importTitle")}
@@ -101,19 +72,6 @@ function ToDoApp() {
       />
 
       <Box p={4}>
-        <SettingsDialog
-          open={settingsDialogOpen}
-          onClose={() => setSettingsDialogOpen(false)}
-          columns={columns}
-          setColumns={setColumns}
-        />
-
-        <ShareDialog
-          data={columns}
-          open={shareDialogOpen}
-          onClose={() => setShareDialogOpen(false)}
-        />
-
         {columns.length > 0 ? (
           <ColumnGrid columns={columns} updateColumn={updateColumn} />
         ) : (

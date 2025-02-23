@@ -1,0 +1,12 @@
+{
+  "profile": "",
+  "region": "",
+  "configuration": "Release",
+  "function-runtime": "dotnet8",
+  "function-memory-size": 256,
+  "function-timeout": 30,
+  "function-handler": "ToDoListApi",
+  "function-name": "ToDoListApi",
+  "enviroment-variables": "",
+  "function-url-enable": true
+}

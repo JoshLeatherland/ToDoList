@@ -5,7 +5,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { ConfirmationDialog, InputDialog } from "../../../components";
 import SortableColumns from "./SortableColumns";
 
-function ListColumns({ columns = [], setColumns }) {
+function ListColumns({ columns = [], updateColumns }) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedColumn, setSelectedColumn] = useState({});
   const [selectedColumnEdit, setSelectedColumnEdit] = useState(null);
@@ -13,13 +13,13 @@ function ListColumns({ columns = [], setColumns }) {
   const { t, ready } = useTranslation();
 
   const deleteColumn = (id) => {
-    setColumns(columns.filter((column) => column.id !== id));
+    updateColumns(columns.filter((column) => column.id !== id));
     setShowDeleteDialog(false);
   };
 
   const handleEditColumn = (newName) => {
     if (selectedColumnEdit && newName.trim() !== "") {
-      setColumns(
+      updateColumns(
         columns.map((column) =>
           column.id === selectedColumnEdit.id
             ? { ...column, name: newName }
@@ -41,7 +41,7 @@ function ListColumns({ columns = [], setColumns }) {
     // Insert the dragged item into its new position.
     reorderedColumns.splice(result.destination.index, 0, movedColumn);
 
-    setColumns(reorderedColumns);
+    updateColumns(reorderedColumns);
   };
 
   if (!ready) return <div>{t("shared.loading")}</div>;
