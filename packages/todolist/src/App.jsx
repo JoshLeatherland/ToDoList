@@ -45,12 +45,6 @@ function App() {
             canShare={Boolean(columns?.length)}
           />
 
-          <ToDoApp
-            columns={columns}
-            updateColumns={updateColumns}
-            updateColumn={updateColumn}
-          />
-
           <SettingsDialog
             open={settingsDialogOpen}
             onClose={() => setSettingsDialogOpen(false)}
@@ -62,6 +56,12 @@ function App() {
             data={columns}
             open={shareDialogOpen}
             onClose={() => setShareDialogOpen(false)}
+          />
+
+          <ToDoApp
+            columns={columns}
+            updateColumns={updateColumns}
+            updateColumn={updateColumn}
           />
         </Box>
       </ThemeProvider>
