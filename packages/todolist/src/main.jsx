@@ -9,7 +9,7 @@ initialiseI18n();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/ToDoList">
       <div style={{ width: "100vw" }}>
         <App />
       </div>

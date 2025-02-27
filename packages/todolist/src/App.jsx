@@ -13,6 +13,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
 import { useBoard } from "./hooks";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const { t, i18n, ready } = useTranslation();
@@ -58,11 +59,18 @@ function App() {
             onClose={() => setShareDialogOpen(false)}
           />
 
-          <ToDoApp
-            columns={columns}
-            updateColumns={updateColumns}
-            updateColumn={updateColumn}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ToDoApp
+                  columns={columns}
+                  updateColumns={updateColumns}
+                  updateColumn={updateColumn}
+                />
+              }
+            />
+          </Routes>
         </Box>
       </ThemeProvider>
     </LocalizationProvider>

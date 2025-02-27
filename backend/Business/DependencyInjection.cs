@@ -1,4 +1,6 @@
-﻿using Business.Services;
+﻿using Amazon;
+using Amazon.SecretsManager;
+using Business.Services;
 using Business.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,8 @@ namespace Business
         {
             services.AddSingleton<IUniqueReferenceService, UniqueReferenceService>();
             services.AddSingleton<IBoardService, BoardService>();
+            services.AddSingleton<IAmazonSecretsManager>(sp => new AmazonSecretsManagerClient(RegionEndpoint.EUWest2));
+            services.AddSingleton<IAwsSecretService, AwsSecretService>();
 
             return services;
         }
