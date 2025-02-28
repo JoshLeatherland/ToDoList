@@ -65,7 +65,22 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
+
+app.UseCors("CorsPolicy");
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
@@ -80,19 +95,19 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "Welcome to ASP.NET Core on AWS Lambda!");
 
-app.MapPost("/api/boards", async (IBoardService boardService) =>
+app.MapPost("/boards", async (IBoardService boardService) =>
 {
     var boardId = await boardService.Create();
     return Results.Created($"/api/boards/{boardId}", new { boardId });
 }).RequireAuthorization();
 
-app.MapGet("/api/boards/{boardId}", async (string boardId, IBoardService boardService) =>
+app.MapGet("/boards/{boardId}", async (string boardId, IBoardService boardService) =>
 {
     var board = await boardService.GetAsync(boardId);
     return board is not null ? Results.Ok(board) : Results.NotFound();
 }).RequireAuthorization();
 
-app.MapPut("/api/boards", async (BoardDto boardDto, IBoardService boardService) =>
+app.MapPut("/boards", async (BoardDto boardDto, IBoardService boardService) =>
 {
     var updatedBoard = await boardService.UpdateAsync(boardDto);
     return updatedBoard is not null ? Results.Ok(updatedBoard) : Results.NotFound();
@@ -123,8 +138,13 @@ app.MapPost("/token", async (string authorizationCode, ICognitoService cognitoSe
         });
     }
 
-    return Results.Ok();
+    return Results.Ok(true);
 });
+
+app.MapPost("/verify", () =>
+{
+    return Results.Ok();
+}).RequireAuthorization();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -4,6 +4,7 @@ import {
   Navbar,
   SettingsDialog,
   ShareDialog,
+  Auth,
 } from "./components";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
@@ -14,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
 import { useBoard } from "./hooks";
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
   const { t, i18n, ready } = useTranslation();
@@ -60,16 +62,20 @@ function App() {
           />
 
           <Routes>
-            <Route
-              path="/"
-              element={
-                <ToDoApp
-                  columns={columns}
-                  updateColumns={updateColumns}
-                  updateColumn={updateColumn}
-                />
-              }
-            />
+            <Route path="/auth" element={<Auth />} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route
+                path="/"
+                element={
+                  <ToDoApp
+                    columns={columns}
+                    updateColumns={updateColumns}
+                    updateColumn={updateColumn}
+                  />
+                }
+              />
+            </Route>
           </Routes>
         </Box>
       </ThemeProvider>
