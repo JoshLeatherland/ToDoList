@@ -35,7 +35,6 @@ function Auth() {
   }, [code]);
 
   useEffect(() => {
-    console.log("login result: ", loginResult);
     if (loginResult && loginResult === true) {
       setIsAuthenticated(true);
       navigate("/");
