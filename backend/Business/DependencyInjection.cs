@@ -1,4 +1,5 @@
 ﻿using Amazon;
+using Amazon.CognitoIdentityProvider;
 using Amazon.SecretsManager;
 using Business.Services;
 using Business.Services.Interfaces;
@@ -15,6 +16,7 @@ namespace Business
             services.AddSingleton<IBoardService, BoardService>();
             services.AddSingleton<IAmazonSecretsManager>(sp => new AmazonSecretsManagerClient(RegionEndpoint.EUWest2));
             services.AddSingleton<IAwsSecretService, AwsSecretService>();
+            services.AddSingleton<ICognitoService, CognitoService>();
 
             return services;
         }
