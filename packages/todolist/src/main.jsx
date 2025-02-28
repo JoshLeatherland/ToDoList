@@ -14,7 +14,8 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="/ToDoList">
+      {/* <BrowserRouter basename="/ToDoList"> */}
+      <BrowserRouter>
         <EnvProvider>
           <AuthProvider>
             <div style={{ width: "100vw" }}>
