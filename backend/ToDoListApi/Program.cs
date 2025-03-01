@@ -123,7 +123,7 @@ app.MapPost("/token", async (string authorizationCode, ICognitoService cognitoSe
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.None,
+            SameSite = SameSiteMode.Lax,
             Expires = DateTime.Now.AddMinutes(60),
             IsEssential = true
         });
@@ -132,7 +132,7 @@ app.MapPost("/token", async (string authorizationCode, ICognitoService cognitoSe
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.None,
+            SameSite = SameSiteMode.Lax,
             Expires = DateTime.Now.AddDays(5),
             IsEssential = true
         });

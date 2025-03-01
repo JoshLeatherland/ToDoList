@@ -27,10 +27,10 @@ namespace Business.Services
                 { "grant_type", "authorization_code" },
                 { "client_id", cognitoConfig.ClientId },
                 { "code", authorizationCode },
-                { "redirect_uri", "https://joshleatherland.github.io/ToDoList/auth" }
+                { "redirect_uri", cognitoConfig.RedirectUri }
             });
 
-            var response = await httpClient.PostAsync("https://eu-west-2pjmhp8a2z.auth.eu-west-2.amazoncognito.com/oauth2/token", content);
+            var response = await httpClient.PostAsync(cognitoConfig.AuthUrl, content);
             var responseBody = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
