@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
 import { Settings } from "@mui/icons-material";
 import ShareIcon from "@mui/icons-material/Share";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../hooks";
 
 function Navbar({
   displayName = "ToDo",
@@ -11,6 +12,8 @@ function Navbar({
   canShare,
 }) {
   const { t, ready } = useTranslation();
+
+  const { isAuthenticated } = useAuth();
 
   if (!ready) return <div>{t("shared.loading")}</div>;
 
@@ -22,14 +25,18 @@ function Navbar({
             ? t("shared.defaultApplicationName")
             : displayName}
         </Typography>
-        {canShare && (
-          <IconButton color="inherit" onClick={onShareClick}>
-            <ShareIcon />
-          </IconButton>
+        {isAuthenticated && (
+          <>
+            {canShare && (
+              <IconButton color="inherit" onClick={onShareClick}>
+                <ShareIcon />
+              </IconButton>
+            )}
+            <IconButton color="inherit" onClick={onSettingsClick}>
+              <Settings />
+            </IconButton>
+          </>
         )}
-        <IconButton color="inherit" onClick={onSettingsClick}>
-          <Settings />
-        </IconButton>
       </Toolbar>
     </AppBar>
   );
