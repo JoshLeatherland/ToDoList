@@ -10,7 +10,11 @@ export default {
   put: async (apiUrl, board) => {
     const axiosClient = useAxiosClient();
 
-    const response = await axiosClient.put(`${apiUrl}/boards`, board);
+    const response = await axiosClient.put(`${apiUrl}/boards`, board, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return response;
   },
 };
