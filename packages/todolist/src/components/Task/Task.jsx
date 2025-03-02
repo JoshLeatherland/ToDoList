@@ -65,7 +65,7 @@ function Task({ task, onUpdateTask, onDeleteTask }) {
     if (newComment.trim() === "") return;
 
     const newCommentObj = {
-      id: Date.now(),
+      id: String(Date.now()),
       text: newComment,
       timestamp: new Date().toLocaleString(),
     };
