@@ -90,29 +90,50 @@ function Auth() {
           sx={{
             width: "100%",
             bgcolor: "background.main",
-            p: 3,
-            borderRadius: 2,
-            boxShadow: 0,
+            p: 4,
+            borderRadius: 3,
+            boxShadow: 1,
           }}
         >
           <Typography
-            variant="h6"
+            variant="h5"
             fontWeight="fontWeightBold"
             align="center"
-            mb={2}
+            mb={3}
             color="text.primary"
           >
-            Please sign in or create an account.
+            Secure Login
           </Typography>
+
+          <Typography
+            variant="body1"
+            align="center"
+            color="text.secondary"
+            mb={3}
+          >
+            To access your account, we use a secure single sign-on platform that
+            ensures a seamless and safe login experience.
+          </Typography>
+
+          <Typography
+            variant="body2"
+            align="center"
+            color="text.secondary"
+            mb={4}
+          >
+            You will be securely redirected to{" "}
+            <strong>auth.joshleatherland.co.uk</strong> to complete your login
+            process.
+          </Typography>
+
           <Button
             variant="contained"
-            type="submit"
             color="primary"
             fullWidth
-            sx={{ mt: 2 }}
+            sx={{ mt: 2, borderRadius: 2 }}
             onClick={() => handleLogin()}
           >
-            Sign In
+            Continue to Login
           </Button>
         </Box>
       )}
