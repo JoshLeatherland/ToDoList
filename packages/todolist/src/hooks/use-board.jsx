@@ -1,56 +1,64 @@
-import { useState, useEffect } from "react";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useIsFetching,
+  useIsMutating,
+} from "@tanstack/react-query";
+import boardsApi from "../services/data/boards-api";
 
-export const useBoard = (dataApiUrl = "", isLocal = true) => {
-  const [columns, setColumns] = useState([]);
+export const useBoard = ({ apiUrl = "", enabled = false }) => {
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getBoard();
-      setColumns(data);
-    };
-    fetchData();
-  }, []);
+  const { data: boardData, isError } = useQuery({
+    queryKey: ["board", apiUrl],
+    queryFn: async () => {
+      const board = await boardsApi.get(apiUrl);
+      return board.data;
+    },
+    enabled: enabled,
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
 
-  const getBoard = async () => {
-    if (isLocal) {
-      return getLocal();
-    }
-    return [];
-  };
+  const { mutate: saveBoard } = useMutation({
+    mutationFn: async (updatedBoard) => {
+      return await boardsApi.put(apiUrl, updatedBoard);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["board", apiUrl] });
+    },
+  });
 
-  const saveBoard = async (data) => {
-    if (isLocal) {
-      saveLocal(data);
-    }
-  };
+  const isFetching = useIsFetching({ queryKey: ["board", apiUrl] }) > 0;
+  const isSaving = useIsMutating({ mutationKey: ["board", apiUrl] }) > 0;
 
   const updateColumns = (newColumns) => {
-    setColumns(newColumns);
-    saveBoard(newColumns);
+    if (!boardData) return;
+
+    const updatedBoard = {
+      ...boardData,
+      columns: newColumns,
+    };
+
+    saveBoard(updatedBoard);
   };
 
   const updateColumn = (id, updatedColumn) => {
-    setColumns((prevColumns) => {
-      const newColumns = prevColumns.map((column) =>
-        column.id === id ? updatedColumn : column
-      );
-      saveBoard(newColumns);
-      return newColumns;
-    });
-  };
+    if (!boardData) return;
 
-  const getLocal = () => {
-    const savedColumns = localStorage.getItem("columns");
-    return savedColumns ? JSON.parse(savedColumns) : [];
-  };
+    const newColumns = boardData.columns.map((column) =>
+      column.id === id ? updatedColumn : column
+    );
 
-  const saveLocal = (data) => {
-    localStorage.setItem("columns", JSON.stringify(data));
+    updateColumns(newColumns);
   };
 
   return {
-    columns,
+    columns: boardData?.columns || [],
     updateColumns,
     updateColumn,
+    loading: isFetching || isSaving,
+    isError,
   };
 };

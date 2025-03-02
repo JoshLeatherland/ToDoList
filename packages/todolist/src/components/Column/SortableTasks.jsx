@@ -5,7 +5,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import Task from "../Task";
 
 function ScrollableTasks({
-  tasks,
+  tasks = [],
   droppableId,
   blur,
   onUpdateTask,
@@ -73,12 +73,12 @@ export default ScrollableTasks;
 ScrollableTasks.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired,
       comments: PropTypes.arrayOf(
         PropTypes.shape({
-          id: PropTypes.number.isRequired,
+          id: PropTypes.string.isRequired,
           text: PropTypes.string.isRequired,
           timestamp: PropTypes.string.isRequired,
         })

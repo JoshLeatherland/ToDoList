@@ -29,7 +29,7 @@ function Column({ column, updateColumn, columnIndex }) {
       tasks: [
         ...column.tasks,
         {
-          id: Date.now(),
+          id: String(Date.now()),
           text: newTask,
           completed: false,
           comments: [],
@@ -203,18 +203,18 @@ export default Column;
 
 Column.propTypes = {
   column: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     blurTasks: PropTypes.bool,
     showCompleted: PropTypes.bool,
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
         comments: PropTypes.arrayOf(
           PropTypes.shape({
-            id: PropTypes.number.isRequired,
+            id: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
             timestamp: PropTypes.string.isRequired,
           })

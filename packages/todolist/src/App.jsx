@@ -3,8 +3,8 @@ import {
   ToDoApp,
   Navbar,
   SettingsDialog,
-  ShareDialog,
   Auth,
+  Loader,
 } from "./components";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
@@ -13,15 +13,15 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
-import { useBoard } from "./hooks";
+import { useAuth, useBoard } from "./hooks";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import { useEnv } from "./contexts";
 
 function App() {
   const { t, i18n, ready } = useTranslation();
   const [locale, setLocale] = useState(i18n.language || "en-gb");
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
-  const [shareDialogOpen, setShareDialogOpen] = useState(false);
 
   useEffect(() => {
     // Dynamically update the locale when `i18n.language` changes
@@ -29,7 +29,13 @@ function App() {
     dayjs.locale(i18n.language.toLocaleLowerCase());
   }, [i18n.language]);
 
-  const { columns, updateColumns, updateColumn } = useBoard();
+  const { apiUrl } = useEnv();
+  const { isAuthenticated } = useAuth();
+
+  const { columns, updateColumns, updateColumn, loading } = useBoard({
+    apiUrl: apiUrl,
+    enabled: isAuthenticated,
+  });
 
   if (!ready) return <div>{t("shared.loading")}</div>;
 
@@ -42,9 +48,10 @@ function App() {
             backgroundColor: theme.palette.backgrounds.main,
           }}
         >
+          <Loader open={loading} />
+
           <Navbar
             onSettingsClick={() => setSettingsDialogOpen(true)}
-            onShareClick={() => setShareDialogOpen(true)}
             canShare={Boolean(columns?.length)}
           />
 
@@ -53,12 +60,6 @@ function App() {
             onClose={() => setSettingsDialogOpen(false)}
             columns={columns}
             updateColumns={updateColumns}
-          />
-
-          <ShareDialog
-            data={columns}
-            open={shareDialogOpen}
-            onClose={() => setShareDialogOpen(false)}
           />
 
           <Routes>

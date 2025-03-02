@@ -14,7 +14,7 @@ function Columns({ columns, updateColumns }) {
     if (columnName.trim() === "") return;
     updateColumns([
       ...columns,
-      { id: Date.now(), name: columnName, tasks: [] },
+      { id: String(Date.now()), name: columnName, tasks: [] },
     ]);
     setInputDialogOpen(false);
   };
