@@ -5,5 +5,6 @@ namespace Database.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IBoardRepository Boards {  get; }
+        IUserBoardRepository UserBoards { get; }
     }
 }

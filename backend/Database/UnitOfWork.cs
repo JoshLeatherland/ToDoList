@@ -12,12 +12,21 @@ namespace Database
         private readonly IAmazonDynamoDB _dynamoDb = dynamoDb;
         private readonly IOptions<AwsResources> _awsResourcesOptions = awsResourcesOptions;
         private BoardRepository? _boardRepository;
+        private UserBoardRepository? _userBoardRepository;
 
         public IBoardRepository Boards
         {
             get
             {
                 return _boardRepository ??= new BoardRepository(_dynamoDb, _awsResourcesOptions);
+            }
+        }
+
+        public IUserBoardRepository UserBoards
+        {
+            get
+            {
+                return _userBoardRepository ??= new UserBoardRepository(_dynamoDb, _awsResourcesOptions);
             }
         }
 
