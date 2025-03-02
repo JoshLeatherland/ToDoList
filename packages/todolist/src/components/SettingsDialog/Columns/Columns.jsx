@@ -5,14 +5,17 @@ import { useTranslation } from "react-i18next";
 import ListColumns from "../ListColumns";
 import { InputDialog } from "../../../components";
 
-function Columns({ columns, setColumns }) {
+function Columns({ columns, updateColumns }) {
   const [inputDialogOpen, setInputDialogOpen] = useState(false);
 
   const { t, ready } = useTranslation();
 
   const addColumn = (columnName) => {
     if (columnName.trim() === "") return;
-    setColumns([...columns, { id: Date.now(), name: columnName, tasks: [] }]);
+    updateColumns([
+      ...columns,
+      { id: Date.now(), name: columnName, tasks: [] },
+    ]);
     setInputDialogOpen(false);
   };
 
@@ -30,7 +33,7 @@ function Columns({ columns, setColumns }) {
         </Button>
       </Box>
 
-      <ListColumns columns={columns} setColumns={setColumns} />
+      <ListColumns columns={columns} updateColumns={updateColumns} />
 
       <InputDialog
         title={t("column.add")}
@@ -51,5 +54,5 @@ export default Columns;
 
 Columns.propTypes = {
   columns: PropTypes.array,
-  setColumns: PropTypes.func,
+  updateColumns: PropTypes.func,
 };

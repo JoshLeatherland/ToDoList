@@ -1,0 +1,13 @@
+/.serverless/**
+/.vs
+/*/bin
+/*/obj
+/node_modules
+/.serverless-offline/**
+
+**/packages/*
+!**/packages/repositories.config
+/obj/Docker
+/bin/Debug
+/obj/Debug
+*.user

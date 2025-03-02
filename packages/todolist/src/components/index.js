@@ -10,3 +10,5 @@ export { default as ToDoApp } from "./ToDoApp";
 export { default as ShareDialog } from "./ShareDialog";
 export { default as TabContainer } from "./TabContainer";
 export { default as InputDialog } from "./InputDialog";
+export { default as Loader } from "./Loader";
+export { default as Auth } from "./Auth";
