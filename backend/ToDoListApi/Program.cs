@@ -78,6 +78,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 app.UseCors("CorsPolicy");
@@ -95,15 +97,9 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "Welcome to ASP.NET Core on AWS Lambda!");
 
-app.MapPost("/boards", async (IBoardService boardService) =>
+app.MapGet("/boards", async (IBoardService boardService) =>
 {
-    var boardId = await boardService.Create();
-    return Results.Created($"/api/boards/{boardId}", new { boardId });
-}).RequireAuthorization();
-
-app.MapGet("/boards/{boardId}", async (string boardId, IBoardService boardService) =>
-{
-    var board = await boardService.GetAsync(boardId);
+    var board = await boardService.GetAsync();
     return board is not null ? Results.Ok(board) : Results.NotFound();
 }).RequireAuthorization();
 
