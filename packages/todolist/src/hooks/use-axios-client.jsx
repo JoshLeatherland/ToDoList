@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const useAxiosClient = (onForbidden = null) => {
+export const useAxiosClient = (onForbidden = null, onUnauthorized = null) => {
   const axiosClient = axios.create({
     baseURL: null,
     withCredentials: true,
@@ -9,10 +9,14 @@ export const useAxiosClient = (onForbidden = null) => {
   axiosClient.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response && error.response.status === 403 && onForbidden) {
-        onForbidden();
+      if (error.response) {
+        if (error.response.status === 403 && onForbidden) {
+          onForbidden();
+        } else if (error.response.status === 401 && onUnauthorized) {
+          onUnauthorized();
+        }
+        return Promise.reject(error);
       }
-      return Promise.reject(error);
     }
   );
 
