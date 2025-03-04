@@ -1,9 +1,11 @@
 using Amazon;
+using Business.Helpers;
 using Business.Middleware;
 using Business.Services.Interfaces;
 using Database.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Models.Constants;
 using Models.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -115,26 +117,32 @@ app.MapPost("/token", async (string authorizationCode, ICognitoService cognitoSe
 
     if (!string.IsNullOrEmpty(response.AccessToken))
     {
-        httpContext.Response.Cookies.Append("accessToken", response.AccessToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Lax,
-            Expires = DateTime.Now.AddMinutes(60),
-            IsEssential = true
-        });
+        CookieHelper.SetCookie(httpContext, CookieTypes.AccessToken, response.AccessToken, DateTime.Now.AddMinutes(15));
+        CookieHelper.SetCookie(httpContext, CookieTypes.RefreshToken, response.RefreshToken, DateTime.Now.AddDays(7));
 
-        httpContext.Response.Cookies.Append("refreshToken", response.RefreshToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Lax,
-            Expires = DateTime.Now.AddDays(5),
-            IsEssential = true
-        });
+        return Results.Ok(true);
     }
 
-    return Results.Ok(true);
+    return Results.Unauthorized();
+});
+
+app.MapPost("/refresh", async (ICognitoService cognitoService, HttpContext httpContext) =>
+{
+    if (!httpContext.Request.Cookies.TryGetValue(CookieTypes.RefreshToken, out var refreshToken))
+    {
+        return Results.Unauthorized();
+    }
+
+    var response = await cognitoService.RefreshToken(refreshToken);
+
+    if (!string.IsNullOrEmpty(response.AccessToken))
+    {
+        CookieHelper.SetCookie(httpContext, CookieTypes.AccessToken, response.AccessToken, DateTime.Now.AddMinutes(15));
+
+        return Results.Ok(true);
+    }
+
+    return Results.Unauthorized();
 });
 
 app.MapPost("/verify", () =>

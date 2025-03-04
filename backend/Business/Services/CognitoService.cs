@@ -42,6 +42,40 @@ namespace Business.Services
             return JsonSerializer.Deserialize<TokenResponse>(responseBody);
         }
 
+        /// <summary>
+        /// A users access token has expired, renew it using the refresh token.
+        /// </summary>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<TokenResponse> RefreshToken(string refreshToken)
+        {
+            var cognitoConfig = await GetCognitoConfigurationAsync();
+
+            using var httpClient = new HttpClient();
+            var content = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                { "grant_type", "refresh_token" },
+                { "client_id", cognitoConfig.ClientId },
+                { "refresh_token", refreshToken }
+            });
+
+            var response = await httpClient.PostAsync(cognitoConfig.AuthUrl, content);
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Error refreshing token: {responseBody}");
+            }
+
+            return JsonSerializer.Deserialize<TokenResponse>(responseBody);
+        }
+
+        /// <summary>
+        /// Any sensitive information is stored inside SecretsManager (AWS), fetch it with this func.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<CognitoConfiguration> GetCognitoConfigurationAsync()
         {
             var secretString = await _awsSecretService.GetSecretASync(SecretManagerKeys.CognitoConfiguration);
