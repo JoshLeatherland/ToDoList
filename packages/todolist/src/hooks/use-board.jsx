@@ -6,14 +6,23 @@ import {
   useIsMutating,
 } from "@tanstack/react-query";
 import boardsApi from "../services/data/boards-api";
+import { useNavigate } from "react-router-dom";
+import { useAxiosClient } from "../hooks";
 
 export const useBoard = ({ apiUrl = "", enabled = false }) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const handleUnauthorized = () => {
+    navigate("/auth");
+  };
+
+  const axiosClient = useAxiosClient(null, handleUnauthorized);
 
   const { data: boardData, isError } = useQuery({
     queryKey: ["board", apiUrl],
     queryFn: async () => {
-      const board = await boardsApi.get(apiUrl);
+      const board = await boardsApi.get(axiosClient, apiUrl);
       return board.data;
     },
     enabled: enabled,
@@ -23,7 +32,7 @@ export const useBoard = ({ apiUrl = "", enabled = false }) => {
 
   const { mutate: saveBoard } = useMutation({
     mutationFn: async (updatedBoard) => {
-      return await boardsApi.put(apiUrl, updatedBoard);
+      return await boardsApi.put(axiosClient, apiUrl, updatedBoard);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["board", apiUrl] });
