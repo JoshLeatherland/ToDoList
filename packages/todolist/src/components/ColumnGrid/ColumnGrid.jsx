@@ -21,7 +21,7 @@ function ColumnGrid({ columns, updateColumn }) {
 ColumnGrid.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       tasks: PropTypes.array, // optional, will default to an empty array if undefined
     })

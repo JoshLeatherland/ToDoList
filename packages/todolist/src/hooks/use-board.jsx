@@ -13,11 +13,7 @@ export const useBoard = ({ apiUrl = "", enabled = false }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const handleUnauthorized = () => {
-    navigate("/auth");
-  };
-
-  const axiosClient = useAxiosClient(null, handleUnauthorized);
+  const axiosClient = useAxiosClient(null);
 
   const { data: boardData, isError } = useQuery({
     queryKey: ["board", apiUrl],
@@ -31,6 +27,7 @@ export const useBoard = ({ apiUrl = "", enabled = false }) => {
   });
 
   const { mutate: saveBoard } = useMutation({
+    mutationKey: ["board", apiUrl],
     mutationFn: async (updatedBoard) => {
       return await boardsApi.put(axiosClient, apiUrl, updatedBoard);
     },
@@ -39,8 +36,8 @@ export const useBoard = ({ apiUrl = "", enabled = false }) => {
     },
   });
 
-  const isFetching = useIsFetching({ queryKey: ["board", apiUrl] }) > 0;
-  const isSaving = useIsMutating({ mutationKey: ["board", apiUrl] }) > 0;
+  const isFetching = useIsFetching({ queryKey: ["board", apiUrl] });
+  const isSaving = useIsMutating({ mutationKey: ["board", apiUrl] });
 
   const updateColumns = (newColumns) => {
     if (!boardData) return;
