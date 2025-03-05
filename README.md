@@ -55,4 +55,4 @@ A straightforward and efficient to-do application that helps you organize your t
 
 ## Demo
 
-Experience the application firsthand by visiting the deployed version [here](https://joshleatherland.github.io/ToDoList/).
+Experience the application firsthand by visiting the deployed version [here](https://ui.joshleatherland.co.uk/).
