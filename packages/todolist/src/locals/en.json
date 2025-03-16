@@ -72,6 +72,12 @@
       "copy": "Click the copy icon to copy the URL.",
       "importTitle": "Import Data from URL",
       "importDescription": "We found data in the URL. Would you like to import it and overwrite your current tasks?"
+    },
+    "dialogs": {
+      "logout": {
+        "title": "Log Out Confirmation",
+        "description": "Are you sure you want to log out?"
+      }
     }
   }
 }

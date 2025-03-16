@@ -72,6 +72,12 @@
       "copy": "Klicken Sie auf das Kopieren-Symbol, um die URL zu kopieren.",
       "importTitle": "Daten aus URL importieren",
       "importDescription": "Wir haben Daten in der URL gefunden. Möchten Sie diese importieren und Ihre aktuellen Aufgaben überschreiben?"
+    },
+    "dialogs": {
+      "logout": {
+        "title": "Abmeldebestätigung",
+        "description": "Bist du sicher, dass du dich abmelden möchtest?"
+      }
     }
   }
 }
