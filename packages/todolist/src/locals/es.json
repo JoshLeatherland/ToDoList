@@ -72,6 +72,12 @@
       "copy": "Haz clic en el ícono de copiar para copiar el URL.",
       "importTitle": "Importar Datos desde URL",
       "importDescription": "Hemos encontrado datos en el URL. ¿Te gustaría importarlos y sobrescribir tus tareas actuales?"
+    },
+    "dialogs": {
+      "logout": {
+        "title": "Confirmación de cierre de sesión",
+        "description": "¿Estás seguro de que deseas cerrar sesión?"
+      }
     }
   }
 }

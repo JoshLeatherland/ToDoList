@@ -35,9 +35,9 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axiosClient.post(`${apiUrl}/logout`);
+      await axiosClient.post(`${apiUrl}/signout`);
       setIsAuthenticated(false);
-      navigate("/login");
+      navigate("/auth");
     } catch (error) {
       console.error("Logout failed:", error);
     }

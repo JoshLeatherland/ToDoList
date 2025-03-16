@@ -17,5 +17,16 @@ namespace Business.Helpers
 
             context.Response.Cookies.Append(name, value, cookieOptions);
         }
+
+        public static void RemoveCookie(HttpContext context, string name)
+        {
+            context.Response.Cookies.Delete(name, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax,
+                IsEssential = true,
+            });
+        }
     }
 }

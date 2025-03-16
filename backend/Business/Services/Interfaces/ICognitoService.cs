@@ -7,5 +7,6 @@ namespace Business.Services.Interfaces
         Task<TokenResponse> GetToken(string authorizationCode);
         Task<TokenResponse> RefreshToken(string refreshToken);
         Task<CognitoConfiguration> GetCognitoConfigurationAsync();
+        Task SignOut(string accessToken);
     }
 }

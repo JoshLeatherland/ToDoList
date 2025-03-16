@@ -145,6 +145,21 @@ app.MapPost("/refresh", async (ICognitoService cognitoService, HttpContext httpC
     return Results.Unauthorized();
 });
 
+app.MapPost("/signout", async (ICognitoService cognitoService, HttpContext httpContext) =>
+{
+    if (!httpContext.Request.Cookies.TryGetValue(CookieTypes.AccessToken, out var accessToken))
+    {
+        return Results.Unauthorized();
+    }
+
+    await cognitoService.SignOut(accessToken);
+
+    CookieHelper.RemoveCookie(httpContext, CookieTypes.AccessToken);
+    CookieHelper.RemoveCookie(httpContext, CookieTypes.RefreshToken);
+
+    return Results.Ok(true);
+});
+
 app.MapPost("/verify", () =>
 {
     return Results.Ok();
