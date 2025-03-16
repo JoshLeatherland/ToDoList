@@ -1,4 +1,5 @@
 ﻿using Amazon.CognitoIdentityProvider;
+using Amazon.CognitoIdentityProvider.Model;
 using Business.Services.Interfaces;
 using Models.Constants;
 using Models.ViewModels;
@@ -6,9 +7,10 @@ using System.Text.Json;
 
 namespace Business.Services
 {
-    public class CognitoService(IAwsSecretService awsSecretService) : ICognitoService
+    public class CognitoService(IAwsSecretService awsSecretService, IAmazonCognitoIdentityProvider cognitoProvider) : ICognitoService
     {
         private readonly IAwsSecretService _awsSecretService = awsSecretService;
+        private readonly IAmazonCognitoIdentityProvider _cognitoProvider = cognitoProvider;
 
         /// <summary>
         /// There isnt a SDK for this so have to do Http.
@@ -82,6 +84,20 @@ namespace Business.Services
 
             return JsonSerializer.Deserialize<CognitoConfiguration>(secretString) ?? 
                 throw new InvalidOperationException("Failed to find Cognito Configuration");
+        }
+
+        /// <summary>
+        /// Sign out via Cognito, invalidates Auth, Refresh and Id token.
+        /// </summary>
+        /// <returns></returns>
+        public async Task SignOut(string accessToken)
+        {
+            var request = new GlobalSignOutRequest
+            {
+                AccessToken = accessToken
+            };
+
+            await _cognitoProvider.GlobalSignOutAsync(request);
         }
     }
 }
