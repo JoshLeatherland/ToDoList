@@ -78,6 +78,13 @@
         "title": "Abmeldebestätigung",
         "description": "Bist du sicher, dass du dich abmelden möchtest?"
       }
+    },
+    "auth": {
+      "loading": "Laden, bitte warten.",
+      "title": "Sicherer Login",
+      "description": "Um auf dein Konto zuzugreifen, verwenden wir eine sichere Single-Sign-On-Plattform, die ein nahtloses und sicheres Anmeldeerlebnis gewährleistet.",
+      "redirectMsg": "Du wirst sicher zu <strong>{{domain}}</strong> weitergeleitet, um deinen Anmeldevorgang abzuschließen.",
+      "continue": "Weiter zum Login"
     }
   }
 }

@@ -78,6 +78,13 @@
         "title": "Confirmación de cierre de sesión",
         "description": "¿Estás seguro de que deseas cerrar sesión?"
       }
+    },
+    "auth": {
+      "loading": "Cargando, por favor espera.",
+      "title": "Inicio de sesión seguro",
+      "description": "Para acceder a tu cuenta, utilizamos una plataforma segura de inicio de sesión único que garantiza una experiencia de acceso fluida y segura.",
+      "redirectMsg": "Serás redirigido de forma segura a <strong>{{domain}}</strong> para completar tu proceso de inicio de sesión.",
+      "continue": "Continuar con el inicio de sesión"
     }
   }
 }
