@@ -1,17 +1,10 @@
-import {
-  Container,
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Link,
-  Snackbar,
-} from "@mui/material";
+import { Container, Box, Button, Typography, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Loader } from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useLogin, useAuth } from "../../hooks";
 import { useEnv } from "../../contexts";
+import { useTranslation, Trans } from "react-i18next";
 
 function Auth() {
   const [validationError, setValidationError] = useState("");
@@ -49,6 +42,10 @@ function Auth() {
     window.location = loginUrl;
   };
 
+  const { t, ready } = useTranslation();
+
+  if (!ready) return <div>{t("shared.loading")}</div>;
+
   return (
     <Container
       maxWidth="xs"
@@ -80,7 +77,7 @@ function Auth() {
             mb={2}
             color="text.primary"
           >
-            Loading, please wait.
+            {t("auth.loading")}
           </Typography>
         </Box>
       )}
@@ -102,7 +99,7 @@ function Auth() {
             mb={3}
             color="text.primary"
           >
-            Secure Login
+            {t("auth.title")}
           </Typography>
 
           <Typography
@@ -111,8 +108,7 @@ function Auth() {
             color="text.secondary"
             mb={3}
           >
-            To access your account, we use a secure single sign-on platform that
-            ensures a seamless and safe login experience.
+            {t("auth.description")}
           </Typography>
 
           <Typography
@@ -121,9 +117,11 @@ function Auth() {
             color="text.secondary"
             mb={4}
           >
-            You will be securely redirected to{" "}
-            <strong>auth.joshleatherland.co.uk</strong> to complete your login
-            process.
+            <Trans
+              i18nKey="auth.redirectMsg"
+              components={{ strong: <strong /> }}
+              values={{ domain: "auth.joshleatherland.co.uk" }}
+            />
           </Typography>
 
           <Button
@@ -133,7 +131,7 @@ function Auth() {
             sx={{ mt: 2, borderRadius: 2 }}
             onClick={() => handleLogin()}
           >
-            Continue to Login
+            {t("auth.continue")}
           </Button>
         </Box>
       )}

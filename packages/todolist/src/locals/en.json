@@ -78,6 +78,13 @@
         "title": "Log Out Confirmation",
         "description": "Are you sure you want to log out?"
       }
+    },
+    "auth": {
+      "loading": "Loading, please wait.",
+      "title": "Secure Login",
+      "description": "To access your account, we use a secure single sign-on platform that ensures a seamless and safe login experience.",
+      "redirectMsg": "You will be securely redirected to <strong>{{domain}}</strong> to complete your login process.",
+      "continue": "Continue to Login"
     }
   }
 }
