@@ -60,11 +60,46 @@ export const useBoard = ({ apiUrl = "", enabled = false }) => {
     updateColumns(newColumns);
   };
 
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+    if (!destination) return;
+    if (!boardData) return;
+
+    const sourceColumn = boardData.columns.find(
+      (col) => col.id === source.droppableId
+    );
+    const destColumn = boardData.columns.find(
+      (col) => col.id === destination.droppableId
+    );
+
+    if (!sourceColumn || !destColumn) return;
+
+    // Create copies of the tasks
+    const sourceTasks = [...sourceColumn.tasks];
+    const destTasks =
+      sourceColumn.id === destColumn.id ? sourceTasks : [...destColumn.tasks];
+
+    // Remove the moved task from the source column
+    const [movedTask] = sourceTasks.splice(source.index, 1);
+
+    // Insert the task into the destination column
+    destTasks.splice(destination.index, 0, movedTask);
+
+    updateColumns(
+      boardData.columns.map((col) => {
+        if (col.id === sourceColumn.id) return { ...col, tasks: sourceTasks };
+        if (col.id === destColumn.id) return { ...col, tasks: destTasks };
+        return col;
+      })
+    );
+  };
+
   return {
     columns: boardData?.columns || [],
     updateColumns,
     updateColumn,
     loading: isFetching || isSaving,
     isError,
+    onDragEnd,
   };
 };
