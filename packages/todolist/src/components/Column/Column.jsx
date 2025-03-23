@@ -60,34 +60,6 @@ function Column({ column, updateColumn, columnIndex }) {
     });
   };
 
-  const onDragEnd = (result) => {
-    const { source, destination } = result;
-    if (!destination) return;
-
-    const isSourceCompleted = source.droppableId === `completed-${columnIndex}`;
-    const isDestCompleted =
-      destination.droppableId === `completed-${columnIndex}`;
-
-    // make sure dragging only between matching sections, i.e same col
-    if (isSourceCompleted !== isDestCompleted) return;
-
-    const tasks = column.tasks.filter((task) =>
-      isSourceCompleted ? task.completed : !task.completed
-    );
-
-    const reorderedTask = tasks.splice(source.index, 1)[0];
-    tasks.splice(destination.index, 0, reorderedTask);
-
-    const updatedColumn = {
-      ...column,
-      tasks: column.tasks.map((task) =>
-        task.completed === isSourceCompleted ? tasks.shift() : task
-      ),
-    };
-
-    updateColumn(column.id, updatedColumn);
-  };
-
   const completedTasks = column.tasks.filter((task) => task.completed);
   const incompleteTasks = column.tasks.filter((task) => !task.completed);
 
@@ -149,15 +121,13 @@ function Column({ column, updateColumn, columnIndex }) {
                 transition: "filter 0.3s ease",
               }}
             >
-              <DragDropContext onDragEnd={onDragEnd}>
-                <SortableTasks
-                  tasks={incompleteTasks}
-                  droppableId={`incomplete-${columnIndex}`}
-                  blur={column.blurTasks}
-                  onUpdateTask={updateTask}
-                  onDeleteTask={deleteTask}
-                />
-              </DragDropContext>
+              <SortableTasks
+                tasks={incompleteTasks}
+                droppableId={column.id}
+                blur={column.blurTasks}
+                onUpdateTask={updateTask}
+                onDeleteTask={deleteTask}
+              />
             </Box>
           )}
 

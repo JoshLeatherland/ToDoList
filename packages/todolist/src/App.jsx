@@ -32,10 +32,12 @@ function App() {
   const { apiUrl } = useEnv();
   const { isAuthenticated } = useAuth();
 
-  const { columns, updateColumns, updateColumn, loading } = useBoard({
-    apiUrl: apiUrl,
-    enabled: isAuthenticated,
-  });
+  const { columns, updateColumns, updateColumn, loading, onDragEnd } = useBoard(
+    {
+      apiUrl: apiUrl,
+      enabled: isAuthenticated,
+    }
+  );
 
   if (!ready) return <div>{t("shared.loading")}</div>;
 
@@ -73,6 +75,7 @@ function App() {
                     columns={columns}
                     updateColumns={updateColumns}
                     updateColumn={updateColumn}
+                    onDragEnd={onDragEnd}
                   />
                 }
               />
