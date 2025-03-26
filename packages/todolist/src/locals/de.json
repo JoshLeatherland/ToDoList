@@ -89,7 +89,8 @@
     "sidebar": {
       "home": "Startseite",
       "columns": "Spalten",
-      "stats": "Statistiken"
+      "stats": "Statistiken",
+      "logout": "Abmelden"
     },
     "manageColumns": {
       "title": "Spalten verwalten",
@@ -98,6 +99,11 @@
     "stats": {
       "title": "Statistiken anzeigen",
       "description": "Überprüfe deine Fortschrittsstatistiken, indem du hinzugefügte Aufgaben mit erledigten Aufgaben innerhalb eines angegebenen Datumsbereichs vergleichst."
+    },
+    "languages": {
+      "en": "Englisch",
+      "es": "Spanisch",
+      "de": "Deutsch"
     }
   }
 }

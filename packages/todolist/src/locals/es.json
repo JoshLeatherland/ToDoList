@@ -89,7 +89,8 @@
     "sidebar": {
       "home": "Inicio",
       "columns": "Columnas",
-      "stats": "Estadísticas"
+      "stats": "Estadísticas",
+      "logout": "Cerrar sesión"
     },
     "manageColumns": {
       "title": "Gestionar Columnas",
@@ -98,6 +99,11 @@
     "stats": {
       "title": "Ver estadísticas",
       "description": "Consulta tus estadísticas de progreso comparando las tareas agregadas versus las tareas completadas dentro de un rango de fechas especificado."
+    },
+    "languages": {
+      "en": "Inglés",
+      "es": "Español",
+      "de": "Alemán"
     }
   }
 }

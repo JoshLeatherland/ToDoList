@@ -162,7 +162,13 @@ function Stats({ columns }) {
           inputFormat="DD/MM/YYYY"
         />
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          mb: 2,
+        }}
+      >
         <Bar data={data} options={options} />
       </Box>
     </Container>

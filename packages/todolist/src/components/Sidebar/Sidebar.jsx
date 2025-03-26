@@ -5,21 +5,23 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon,
-  IconButton,
-  useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Menu, Home, Assignment, AccessTime } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { ConfirmationDialog } from "../../components";
+import LogoutIcon from "@mui/icons-material/Logout";
 
-function Sidebar({ open, setOpen }) {
+function Sidebar({ open, setOpen, onLogout }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  //const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const { t, ready } = useTranslation();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   if (!ready) return <div>{t("shared.loading")}</div>;
 
@@ -77,8 +79,30 @@ function Sidebar({ open, setOpen }) {
               {open && <ListItemText primary={t("sidebar.stats")} />}
             </ListItemButton>
           </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => setDialogOpen(true)}>
+              <ListItemIcon
+                sx={{ color: "white", minWidth: open ? "40px" : "auto" }}
+              >
+                <LogoutIcon />
+              </ListItemIcon>
+              {open && <ListItemText primary={t("sidebar.logout")} />}
+            </ListItemButton>
+          </ListItem>
         </List>
       </Box>
+
+      <ConfirmationDialog
+        open={dialogOpen}
+        title={t("dialogs.logout.title")}
+        description={t("dialogs.logout.description")}
+        onCancel={() => setDialogOpen(false)}
+        onConfirm={async () => {
+          setDialogOpen(false);
+          await onLogout();
+        }}
+      />
     </Box>
   );
 }
