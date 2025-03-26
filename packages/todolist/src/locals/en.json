@@ -85,6 +85,19 @@
       "description": "To access your account, we use a secure single sign-on platform that ensures a seamless and safe login experience.",
       "redirectMsg": "You will be securely redirected to <strong>{{domain}}</strong> to complete your login process.",
       "continue": "Continue to Login"
+    },
+    "sidebar": {
+      "home": "Home",
+      "columns": "Columns",
+      "stats": "Stats"
+    },
+    "manageColumns": {
+      "title": "Manage Columns",
+      "description": "Add, manage, and reorder columns with drag and drop."
+    },
+    "stats": {
+      "title": "Check Stats",
+      "description": "Check your progress stats by comparing tasks added versus tasks completed within a specified date range."
     }
   }
 }
