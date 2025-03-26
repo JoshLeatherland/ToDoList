@@ -16,5 +16,7 @@ namespace Database.Entities
         public List<CommentDto> Comments { get; set; } = [];
         [JsonPropertyName("completed")]
         public bool Completed { get; set; }
+        [JsonPropertyName("completedDate")]
+        public string CompletedDate { get; set; } = string.Empty;
     }
 }

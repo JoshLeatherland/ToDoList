@@ -6,8 +6,15 @@ import { useAuth } from "../../hooks";
 import { useState } from "react";
 import { ConfirmationDialog } from "../../components";
 import LogoutIcon from "@mui/icons-material/Logout";
+import MenuIcon from "@mui/icons-material/Menu";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
-function Navbar({ displayName = "ToDo", onSettingsClick, canShare }) {
+function Navbar({
+  displayName = "ToDo",
+  onSettingsClick,
+  sidebarOpen,
+  setSidebarOpen,
+}) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const { t, ready } = useTranslation();
 
@@ -17,9 +24,18 @@ function Navbar({ displayName = "ToDo", onSettingsClick, canShare }) {
 
   return (
     <>
-      <AppBar position="sticky" color="primary" sx={{ boxShadow: 0 }}>
+      <AppBar position="sticky" sx={{ boxShadow: 0 }} elevation={0}>
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          {isAuthenticated && (
+            <IconButton
+              sx={{ ml: 0, pl: 0 }}
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              color="inherit"
+            >
+              {sidebarOpen ? <MenuOpenIcon /> : <MenuIcon />}
+            </IconButton>
+          )}
+          <Typography variant="h6" sx={{ flexGrow: 1, ml: 1 }}>
             {displayName === "ToDo"
               ? t("shared.defaultApplicationName")
               : displayName}

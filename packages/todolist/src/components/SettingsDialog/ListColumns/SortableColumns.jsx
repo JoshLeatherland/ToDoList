@@ -6,6 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 function SortableColumns({
   columns,
@@ -67,6 +68,9 @@ function SortableColumns({
                         backgroundColor: theme.palette.tasks?.active,
                       }}
                     >
+                      <DragIndicatorIcon
+                        sx={{ cursor: "grab", color: "grey.500" }}
+                      />
                       <Box flexGrow={1} ml={2}>
                         <Typography
                           variant="body1"

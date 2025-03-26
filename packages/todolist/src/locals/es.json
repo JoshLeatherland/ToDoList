@@ -85,6 +85,19 @@
       "description": "Para acceder a tu cuenta, utilizamos una plataforma segura de inicio de sesión único que garantiza una experiencia de acceso fluida y segura.",
       "redirectMsg": "Serás redirigido de forma segura a <strong>{{domain}}</strong> para completar tu proceso de inicio de sesión.",
       "continue": "Continuar con el inicio de sesión"
+    },
+    "sidebar": {
+      "home": "Inicio",
+      "columns": "Columnas",
+      "stats": "Estadísticas"
+    },
+    "manageColumns": {
+      "title": "Gestionar Columnas",
+      "description": "Agrega, gestiona y reordena columnas con arrastrar y soltar."
+    },
+    "stats": {
+      "title": "Ver estadísticas",
+      "description": "Consulta tus estadísticas de progreso comparando las tareas agregadas versus las tareas completadas dentro de un rango de fechas especificado."
     }
   }
 }
