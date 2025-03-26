@@ -24,7 +24,6 @@ import { useEnv } from "./contexts";
 function App() {
   const { t, i18n, ready } = useTranslation();
   const [locale, setLocale] = useState(i18n.language || "en-gb");
-  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ function App() {
   }, [i18n.language]);
 
   const { apiUrl } = useEnv();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const { columns, updateColumns, updateColumn, loading, onDragEnd } = useBoard(
     {
@@ -58,15 +57,15 @@ function App() {
         >
           <Loader open={loading} />
 
-          <Navbar
-            onSettingsClick={() => setSettingsDialogOpen(true)}
-            sidebarOpen={sidebarOpen}
-            setSidebarOpen={setSidebarOpen}
-          />
+          <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           <Box sx={{ display: "flex", flex: 1 }}>
             {isAuthenticated && (
-              <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+              <Sidebar
+                open={sidebarOpen}
+                setOpen={setSidebarOpen}
+                onLogout={logout}
+              />
             )}
 
             <Box
@@ -106,13 +105,6 @@ function App() {
               </Routes>
             </Box>
           </Box>
-
-          <SettingsDialog
-            open={settingsDialogOpen}
-            onClose={() => setSettingsDialogOpen(false)}
-            columns={columns}
-            updateColumns={updateColumns}
-          />
         </Box>
       </ThemeProvider>
     </LocalizationProvider>

@@ -89,7 +89,8 @@
     "sidebar": {
       "home": "Home",
       "columns": "Columns",
-      "stats": "Stats"
+      "stats": "Stats",
+      "logout": "Log Out"
     },
     "manageColumns": {
       "title": "Manage Columns",
@@ -98,6 +99,11 @@
     "stats": {
       "title": "Check Stats",
       "description": "Check your progress stats by comparing tasks added versus tasks completed within a specified date range."
+    },
+    "languages": {
+      "en": "English",
+      "es": "Spanish",
+      "de": "German"
     }
   }
 }

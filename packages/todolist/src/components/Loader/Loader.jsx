@@ -7,7 +7,7 @@ function Loader({ open = false }) {
     <div>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.modal + 2 }}
-        open={open}
+        open={Boolean(open)}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
