@@ -12,3 +12,6 @@ export { default as TabContainer } from "./TabContainer";
 export { default as InputDialog } from "./InputDialog";
 export { default as Loader } from "./Loader";
 export { default as Auth } from "./Auth";
+export { default as Sidebar } from "./Sidebar";
+export { default as Columns } from "./SettingsDialog/Columns";
+export { default as Stats } from "./SettingsDialog/Stats";

@@ -5,6 +5,9 @@ import {
   SettingsDialog,
   Auth,
   Loader,
+  Sidebar,
+  Columns,
+  Stats,
 } from "./components";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
@@ -21,7 +24,7 @@ import { useEnv } from "./contexts";
 function App() {
   const { t, i18n, ready } = useTranslation();
   const [locale, setLocale] = useState(i18n.language || "en-gb");
-  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     // Dynamically update the locale when `i18n.language` changes
@@ -30,7 +33,7 @@ function App() {
   }, [i18n.language]);
 
   const { apiUrl } = useEnv();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const { columns, updateColumns, updateColumn, loading, onDragEnd } = useBoard(
     {
@@ -46,41 +49,62 @@ function App() {
       <ThemeProvider theme={theme}>
         <Box
           sx={{
-            minHeight: "100vh",
+            height: "100vh",
             backgroundColor: theme.palette.backgrounds.main,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <Loader open={loading} />
 
-          <Navbar
-            onSettingsClick={() => setSettingsDialogOpen(true)}
-            canShare={Boolean(columns?.length)}
-          />
+          <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-          <SettingsDialog
-            open={settingsDialogOpen}
-            onClose={() => setSettingsDialogOpen(false)}
-            columns={columns}
-            updateColumns={updateColumns}
-          />
-
-          <Routes>
-            <Route path="/auth" element={<Auth />} />
-
-            <Route element={<ProtectedRoute />}>
-              <Route
-                path="/"
-                element={
-                  <ToDoApp
-                    columns={columns}
-                    updateColumns={updateColumns}
-                    updateColumn={updateColumn}
-                    onDragEnd={onDragEnd}
-                  />
-                }
+          <Box sx={{ display: "flex", flex: 1 }}>
+            {isAuthenticated && (
+              <Sidebar
+                open={sidebarOpen}
+                setOpen={setSidebarOpen}
+                onLogout={logout}
               />
-            </Route>
-          </Routes>
+            )}
+
+            <Box
+              sx={{
+                flex: 1,
+                overflowY: "auto",
+              }}
+            >
+              <Routes>
+                <Route path="/auth" element={<Auth />} />
+
+                <Route element={<ProtectedRoute />}>
+                  <Route
+                    path="/"
+                    element={
+                      <ToDoApp
+                        columns={columns}
+                        updateColumns={updateColumns}
+                        updateColumn={updateColumn}
+                        onDragEnd={onDragEnd}
+                      />
+                    }
+                  />
+
+                  <Route
+                    path="/columns"
+                    element={
+                      <Columns
+                        columns={columns}
+                        updateColumns={updateColumns}
+                      />
+                    }
+                  />
+
+                  <Route path="/stats" element={<Stats columns={columns} />} />
+                </Route>
+              </Routes>
+            </Box>
+          </Box>
         </Box>
       </ThemeProvider>
     </LocalizationProvider>
