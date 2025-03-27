@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Box } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Bar } from "react-chartjs-2";
 import {
@@ -135,7 +135,25 @@ function Stats({ columns }) {
   };
 
   return (
-    <>
+    <Container sx={{ mt: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 2,
+          height: "100%",
+        }}
+      >
+        <Typography variant="h6" fontWeight="fontWeightBold">
+          {t("stats.title")}
+        </Typography>
+      </Box>
+
+      <Typography variant="subtitle2" sx={{ mb: 3 }}>
+        {t("stats.description")}
+      </Typography>
+
       <Box sx={{ mb: 2 }}>
         <DatePicker
           label={t("settingsDialog.statsChart.startDateLabel")}
@@ -144,10 +162,16 @@ function Stats({ columns }) {
           inputFormat="DD/MM/YYYY"
         />
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          mb: 2,
+        }}
+      >
         <Bar data={data} options={options} />
       </Box>
-    </>
+    </Container>
   );
 }
 

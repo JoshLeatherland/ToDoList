@@ -85,6 +85,25 @@
       "description": "Um auf dein Konto zuzugreifen, verwenden wir eine sichere Single-Sign-On-Plattform, die ein nahtloses und sicheres Anmeldeerlebnis gewährleistet.",
       "redirectMsg": "Du wirst sicher zu <strong>{{domain}}</strong> weitergeleitet, um deinen Anmeldevorgang abzuschließen.",
       "continue": "Weiter zum Login"
+    },
+    "sidebar": {
+      "home": "Startseite",
+      "columns": "Spalten",
+      "stats": "Statistiken",
+      "logout": "Abmelden"
+    },
+    "manageColumns": {
+      "title": "Spalten verwalten",
+      "description": "Füge Spalten hinzu, verwalte sie und ordne sie per Drag & Drop neu an."
+    },
+    "stats": {
+      "title": "Statistiken anzeigen",
+      "description": "Überprüfe deine Fortschrittsstatistiken, indem du hinzugefügte Aufgaben mit erledigten Aufgaben innerhalb eines angegebenen Datumsbereichs vergleichst."
+    },
+    "languages": {
+      "en": "Englisch",
+      "es": "Spanisch",
+      "de": "Deutsch"
     }
   }
 }

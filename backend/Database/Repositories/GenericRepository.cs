@@ -50,7 +50,7 @@ namespace Database.Repositories
         {
             return new GetItemRequest
             {
-                TableName = _awsResources.DynamoSharedTable,
+                TableName = GetTableName(),
                 Key = new Dictionary<string, AttributeValue>
                 {
                     { "PK", new AttributeValue { S = partitionKey } },
@@ -63,7 +63,7 @@ namespace Database.Repositories
         {
             return new PutItemRequest
             {
-                TableName = _awsResources.DynamoSharedTable,
+                TableName = GetTableName(),
                 Item = new Dictionary<string, AttributeValue>
                 {
                     { "PK", new AttributeValue { S = partitionKey } },
@@ -78,13 +78,21 @@ namespace Database.Repositories
         {
             return new DeleteItemRequest
             {
-                TableName = _awsResources.DynamoSharedTable,
+                TableName = GetTableName(),
                 Key = new Dictionary<string, AttributeValue>
                 {
                     { "PK", new AttributeValue { S = partitionKey } },
                     { "SK", new AttributeValue { S = sortKey } }
                 }
             };
+        }
+
+        private string GetTableName()
+        {
+            if (string.IsNullOrEmpty(_awsResources.StageAlias)) 
+                return _awsResources.DynamoSharedTable;
+
+            return $"{_awsResources.DynamoSharedTable}-{_awsResources.StageAlias}";
         }
         #endregion
     }

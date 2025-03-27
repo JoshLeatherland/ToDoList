@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { decodeData } from "../../utils/base64";
 import { useTranslation } from "react-i18next";
 
-function ToDoApp({ columns, updateColumns, updateColumn }) {
+function ToDoApp({ columns, updateColumns, updateColumn, onDragEnd }) {
   const [importDialogOpen, setImportDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -73,7 +73,11 @@ function ToDoApp({ columns, updateColumns, updateColumn }) {
 
       <Box p={4}>
         {columns.length > 0 ? (
-          <ColumnGrid columns={columns} updateColumn={updateColumn} />
+          <ColumnGrid
+            columns={columns}
+            updateColumn={updateColumn}
+            onDragEnd={onDragEnd}
+          />
         ) : (
           <EmptyState />
         )}

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Container, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import ListColumns from "../ListColumns";
 import { InputDialog } from "../../../components";
@@ -22,8 +22,18 @@ function Columns({ columns, updateColumns }) {
   if (!ready) return <div>{t("shared.loading")}</div>;
 
   return (
-    <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+    <Container sx={{ mt: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 2,
+        }}
+      >
+        <Typography variant="h6" fontWeight="fontWeightBold">
+          {t("manageColumns.title")}
+        </Typography>
         <Button
           variant="outlined"
           size="small"
@@ -32,6 +42,10 @@ function Columns({ columns, updateColumns }) {
           {t("shared.add")}
         </Button>
       </Box>
+
+      <Typography variant="subtitle2" sx={{ mb: 2 }}>
+        {t("manageColumns.description")}
+      </Typography>
 
       <ListColumns columns={columns} updateColumns={updateColumns} />
 
@@ -46,7 +60,7 @@ function Columns({ columns, updateColumns }) {
           addColumn(val);
         }}
       />
-    </>
+    </Container>
   );
 }
 
