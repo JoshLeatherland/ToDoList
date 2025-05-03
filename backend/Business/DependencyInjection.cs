@@ -3,14 +3,13 @@ using Amazon.CognitoIdentityProvider;
 using Amazon.SecretsManager;
 using Business.Services;
 using Business.Services.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Business
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddBusiness(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddBusiness(this IServiceCollection services)
         {
             services.AddSingleton<IUniqueReferenceService, UniqueReferenceService>();
             

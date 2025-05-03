@@ -1,12 +1,12 @@
 using Amazon;
-using Business.Helpers;
 using Business.Middleware;
 using Business.Services.Interfaces;
-using Database.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Models.Constants;
 using Models.ViewModels;
+using Database;
+using Business;
+using ToDoListApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 builder.Services.Configure<AwsResources>(builder.Configuration.GetSection("AwsResources"));
-Database.DependencyInjection.AddDatabase(builder.Services, builder.Configuration);
-Business.DependencyInjection.AddBusiness(builder.Services, builder.Configuration);
+
+builder.Services.AddDatabase().AddBusiness();
 
 var cognitoService = builder.Services.BuildServiceProvider().GetRequiredService<ICognitoService>();
 var cognitoConfiguration = await cognitoService.GetCognitoConfigurationAsync();
@@ -99,71 +99,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "Welcome to ASP.NET Core on AWS Lambda!");
 
-app.MapGet("/boards", async (IBoardService boardService) =>
-{
-    var board = await boardService.GetAsync();
-    return board is not null ? Results.Ok(board) : Results.NotFound();
-}).RequireAuthorization();
-
-app.MapPut("/boards", async (BoardDto boardDto, IBoardService boardService) =>
-{
-    var updatedBoard = await boardService.UpdateAsync(boardDto);
-    return updatedBoard is not null ? Results.Ok(updatedBoard) : Results.NotFound();
-}).RequireAuthorization();
-
-app.MapPost("/token", async (string authorizationCode, ICognitoService cognitoService, HttpContext httpContext) =>
-{
-    var response = await cognitoService.GetToken(authorizationCode);
-
-    if (!string.IsNullOrEmpty(response.AccessToken))
-    {
-        CookieHelper.SetCookie(httpContext, CookieTypes.AccessToken, response.AccessToken, DateTime.Now.AddMinutes(15));
-        CookieHelper.SetCookie(httpContext, CookieTypes.RefreshToken, response.RefreshToken, DateTime.Now.AddDays(7));
-
-        return Results.Ok(true);
-    }
-
-    return Results.Unauthorized();
-});
-
-app.MapPost("/refresh", async (ICognitoService cognitoService, HttpContext httpContext) =>
-{
-    if (!httpContext.Request.Cookies.TryGetValue(CookieTypes.RefreshToken, out var refreshToken))
-    {
-        return Results.Unauthorized();
-    }
-
-    var response = await cognitoService.RefreshToken(refreshToken);
-
-    if (!string.IsNullOrEmpty(response.AccessToken))
-    {
-        CookieHelper.SetCookie(httpContext, CookieTypes.AccessToken, response.AccessToken, DateTime.Now.AddMinutes(15));
-
-        return Results.Ok(true);
-    }
-
-    return Results.Unauthorized();
-});
-
-app.MapPost("/signout", async (ICognitoService cognitoService, HttpContext httpContext) =>
-{
-    if (!httpContext.Request.Cookies.TryGetValue(CookieTypes.AccessToken, out var accessToken))
-    {
-        return Results.Unauthorized();
-    }
-
-    await cognitoService.SignOut(accessToken);
-
-    CookieHelper.RemoveCookie(httpContext, CookieTypes.AccessToken);
-    CookieHelper.RemoveCookie(httpContext, CookieTypes.RefreshToken);
-
-    return Results.Ok(true);
-});
-
-app.MapPost("/verify", () =>
-{
-    return Results.Ok();
-}).RequireAuthorization();
+app.MapBoardEndpoints().AddAuthenticationEndpoints();
 
 app.UseAuthentication();
 app.UseAuthorization();
